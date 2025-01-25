@@ -1,4 +1,4 @@
-extends Node2D
+extends Node3D
 
 @onready var is_paused := false
 @onready var menu = $CanvasLayer/MenuContainer

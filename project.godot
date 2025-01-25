@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Touche pas à ma bulle"
-run/main_scene="res://Scenes/CoreScenes/StartScreen/start_screen.tscn"
+run/main_scene="res://Scenes/CoreScenes/Game/game.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -76,6 +76,13 @@ scroll_down={
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":16,"position":Vector2(222, 0),"global_position":Vector2(231, 46),"factor":1.0,"button_index":5,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
+
+[layer_names]
+
+3d_physics/layer_1="Floor"
+3d_physics/layer_2="Player"
+3d_physics/layer_3="Bubble"
+3d_physics/layer_4="Arrow"
 
 [rendering]
 
