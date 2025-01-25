@@ -50,7 +50,8 @@ func _physics_process(delta):
 			_conditions = _conditions | Conditions.SPRINTING
 		elif _conditions & Conditions.SPRINTING:
 			_conditions = _conditions ^ Conditions.SPRINTING
-		print(_conditions)	
+		print(_conditions)
+		
 		var horizontal_velocity := Vector3(velocity.x, 0, velocity.z)
 		var horizontal_dir := horizontal_velocity.normalized()
 		var horizontal_speed := horizontal_velocity.length()
@@ -58,7 +59,7 @@ func _physics_process(delta):
 		var input_dir := _device_input.get_vector(&"move_left", &"move_right", &"move_up", &"move_down")
 		var movement_dir := _camera_basis * Vector3(input_dir.x, 0.0, input_dir.y)
 		movement_dir.y = 0.0
-		movement_dir = movement_dir.normalized()
+  	movement_dir = movement_dir.normalized()
 		
 		var sharp_turn := horizontal_speed > 0.1 and \
 			acos(movement_dir.dot(horizontal_dir)) > SHARP_TURN_THRESHOLD
