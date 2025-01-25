@@ -1,7 +1,7 @@
 extends RigidBody3D
 
 var max_blow_str := 5
-var bubble_id := 1
+@export var bubble_id : int
 
 func _on_dude_blow(player_pos : Vector3, player_id : int):
 	var blow_dir : Vector2

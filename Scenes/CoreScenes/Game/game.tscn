@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cubm8ayprtkdv"]
+[gd_scene load_steps=9 format=3 uid="uid://cubm8ayprtkdv"]
 
 [ext_resource type="Script" path="res://Scenes/CoreScenes/Game/game.gd" id="1_ntdck"]
 [ext_resource type="PackedScene" uid="uid://bwrhsav1b6hkf" path="res://Scenes/CoreScenes/Settings/settings.tscn" id="2_tpptn"]
+[ext_resource type="Script" path="res://Scenes/CoreScenes/Game/info_label.gd" id="3_ge7a4"]
 [ext_resource type="Script" path="res://Scenes/Dude/dude.gd" id="3_n4jml"]
 [ext_resource type="PackedScene" uid="uid://pgo07hl7oibs" path="res://Scenes/Bubble/bubble.tscn" id="4_eefs4"]
 [ext_resource type="PackedScene" uid="uid://b7cybsrtj67rb" path="res://Scenes/Floor/floor.tscn" id="4_m5sd4"]
@@ -64,13 +65,33 @@ offset_top = 204.0
 offset_right = -239.0
 offset_bottom = -105.0
 
+[node name="InfoLabel" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.5
+offset_top = -87.5
+offset_right = 36.5
+offset_bottom = 87.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 128
+text = "3"
+script = ExtResource("3_ge7a4")
+
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.605155, 0.796108, 0, -0.796108, 0.605155, -0.0870547, 11.2931, 8.88654)
 environment = SubResource("Environment_duak3")
 fov = 70.0
 
 [node name="Dude" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.16749, 0)
+unique_name_in_owner = true
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.20861, 1.16749, 0)
 mesh = SubResource("CapsuleMesh_hs7sc")
 script = ExtResource("3_n4jml")
 
@@ -88,14 +109,23 @@ transform = Transform3D(-0.0416141, 0, 0.999134, 0, 1, 0, -0.999134, 0, -0.04161
 [node name="DirectionalLight3D4" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.108954, 0, -0.994047, 0, 1, 0, 0.994047, 0, 0.108954, 0, 8.73129, 0)
 
-[node name="Bubble" parent="." instance=ExtResource("4_eefs4")]
+[node name="Bubble1" parent="." instance=ExtResource("4_eefs4")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.26304, 1.29913, 0)
+bubble_id = 1
+
+[node name="Bubble2" parent="." instance=ExtResource("4_eefs4")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.26304, 1.29913, 0)
+bubble_id = 2
 
 [node name="P1Score" type="Label3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(5.34818, 0, 0, 0, 3.90564, 0, 0, 0, 1, -1.56582, 2.67892, -7.55133)
 text = "0"
 
 [node name="P2Score" type="Label3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(5.34818, 0, 0, 0, 3.90564, 0, 0, 0, 1, 1.5752, 2.67892, -7.55133)
 text = "0"
 
@@ -109,4 +139,5 @@ text = "Score"
 [connection signal="pressed" from="CanvasLayer/MenuContainer/RetryBtn" to="." method="_on_retry_btn_pressed"]
 [connection signal="pressed" from="CanvasLayer/MenuContainer/QuitBtn" to="." method="_on_quit_btn_pressed"]
 [connection signal="exit_settings" from="CanvasLayer/Settings" to="." method="_on_settings_exit_settings"]
-[connection signal="Blow" from="Dude" to="Bubble" method="_on_dude_blow"]
+[connection signal="Blow" from="Dude" to="Bubble1" method="_on_dude_blow"]
+[connection signal="bubble_exited_area" from="Floor" to="." method="_on_floor_bubble_exited_area"]
