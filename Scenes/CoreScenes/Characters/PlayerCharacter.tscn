@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cy7vpsr253j7a"]
+[gd_scene load_steps=9 format=3 uid="uid://cy7vpsr253j7a"]
 
 [ext_resource type="Script" path="res://Scenes/CoreScenes/Characters/PlayerCharacter.gd" id="1_jj4dk"]
 [ext_resource type="Material" uid="uid://b6dfao5kqnm3l" path="res://Shaders/ShaderMaterials/BubbleMaterial01.tres" id="2_4fwfy"]
@@ -11,6 +11,15 @@
 
 [sub_resource type="SphereMesh" id="SphereMesh_1xr3o"]
 material = ExtResource("2_4fwfy")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_35uqg"]
+diffuse_mode = 3
+disable_fog = true
+albedo_color = Color(1, 0.537255, 1, 1)
+refraction_enabled = true
+
+[sub_resource type="PrismMesh" id="PrismMesh_57sbd"]
+material = SubResource("StandardMaterial3D_35uqg")
 
 [node name="PlayerCharacter" type="CharacterBody3D"]
 input_ray_pickable = false
@@ -34,3 +43,7 @@ shape = SubResource("CapsuleShape3D_rkeh8")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.92266, 0.433251, 0)
 mesh = SubResource("SphereMesh_1xr3o")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.02632, -0.13362, 2.67548)
+mesh = SubResource("PrismMesh_57sbd")

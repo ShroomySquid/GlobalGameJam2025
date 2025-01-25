@@ -1,5 +1,6 @@
 // Available at: https://godotshaders.com/shader/distortion-bubble/
 shader_type spatial;
+render_mode diffuse_toon;
 
 // fragment uniforms
 uniform float distortionView : hint_range(0.0, 0.3, 0.005) = 0.03;
@@ -8,6 +9,7 @@ uniform sampler2D noiseViewX;
 uniform sampler2D noiseViewY;
 uniform sampler2D screenTexture : hint_screen_texture;
 uniform vec3 tintColor : source_color;
+uniform vec3 pulseColor : source_color;
 uniform float fesnelAmount : hint_range(0.0, 5.0, 0.1);
 uniform float pulse_frequency : hint_range(0.1, 10.0) = 2.0;
 
@@ -16,7 +18,25 @@ uniform float distortionVertex : hint_range(0.0, 0.3, 0.005) = 0.03;
 uniform float speedVertex : hint_range(0.0, 1.0, 0.005) = 0.1;
 uniform sampler2D noiseVertex;
 
+uniform float scale : hint_range(0.1, 10.0) = 1.0;
 uniform float shield_power : hint_range(0.0, 1.0) = 0.8;
+uniform float rim_power : hint_range(0.0, 5.0) = 2.0;
+
+float noise(vec3 p) {
+    return fract(sin(dot(p, vec3(12.9898, 78.233, 45.5432))) * 43758.5453);
+}
+
+float fbm(vec3 p) {
+    float value = 1.0;
+    float amplitude = 0.15;
+    float frequency = 0.05;
+    for (int i = 0; i < 5; i++) {
+        value += amplitude * noise(p * frequency);
+        amplitude *= 0.5;
+        frequency *= 2.0;
+    }
+    return value;
+}
 
 float fresnel(float amount, vec3 normal, vec3 view)
 {
@@ -38,14 +58,28 @@ void fragment()
 	vec3 distortedScreenTexture = vec3(texture(screenTexture, SCREEN_UV + noiseDistort).rgb);
 	vec3 fesnelTint = (tintColor * fresnel(fesnelAmount, NORMAL, VIEW));
 	vec3 finalColor = distortedScreenTexture + fesnelTint;
-	ALBEDO = distortedScreenTexture + fesnelTint;
-	// material properties
+
+
+	// Combine effects
 	float pulse = (sin(TIME * pulse_frequency) + 1.0) * 0.5;
-	float shield_intensity = mix(shield_power, 1.0, fresnel(fesnelAmount, NORMAL, VIEW));
-    shield_intensity *= mix(0.8, 1.2, noiseValueX);
+	vec3 noise_pos = VERTEX * scale + vec3(0.0, 0.0, TIME * speedView);
+    float noise_val = fbm(noise_pos);
+	vec3 view_dir = normalize(VIEW);
+    vec3 normal = normalize(NORMAL);
+	float fresnelPulse = pow(1.0 - dot(normal, view_dir), rim_power);
+    float shield_intensity = mix(shield_power, 1.0, fresnelPulse);
+    shield_intensity *= mix(0.8, 1.2, noise_val);
     shield_intensity *= mix(0.9, 1.1, pulse);
-    //EMISSION = finalColor.rgb * shield_intensity * 2.0;
+    
+    // Color mixing
+    vec3 final_color = mix(finalColor, pulseColor, pulse * 0.5);
+    final_color.rgb *= shield_intensity;
+    
+	
+	ALBEDO =  final_color.rgb;
+	// material properties
+    EMISSION = finalColor.rgb * shield_intensity;
     ALPHA = clamp(shield_intensity * 1.5, 0.0, 1.0);
-    ROUGHNESS = 0.1;
+    ROUGHNESS = 0.3;
     METALLIC = 0.8;
 }
