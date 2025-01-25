@@ -50,8 +50,7 @@ func _physics_process(delta):
 			_conditions = _conditions | Conditions.SPRINTING
 		elif _conditions & Conditions.SPRINTING:
 			_conditions = _conditions ^ Conditions.SPRINTING
-		print(_conditions)
-		
+		print(_conditions)	
 		var horizontal_velocity := Vector3(velocity.x, 0, velocity.z)
 		var horizontal_dir := horizontal_velocity.normalized()
 		var horizontal_speed := horizontal_velocity.length()

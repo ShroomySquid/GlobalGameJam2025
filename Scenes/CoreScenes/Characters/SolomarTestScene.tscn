@@ -34,9 +34,13 @@ axis_lock_linear_z = false
 axis_lock_angular_x = false
 axis_lock_angular_y = false
 
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.809335, 0.587347, 0, -0.587347, 0.809335, 0, 2.64824, 3.12324)
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.618093, 0.373697, -0.691601, 0, 0.879781, 0.475379, 0.786105, -0.293828, 0.543787, 0, 3.66994, 12.0142)
 shadow_enabled = true
 
 [node name="BaseStage" parent="." instance=ExtResource("2_gq3wh")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0.54678)
+
