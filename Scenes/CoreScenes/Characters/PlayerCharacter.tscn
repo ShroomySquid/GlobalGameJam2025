@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cy7vpsr253j7a"]
+
+[ext_resource type="Script" path="res://Scenes/CoreScenes/Characters/PlayerCharacter.gd" id="1_jj4dk"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_a2uyt"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rkeh8"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_vw4wj"]
+
+[node name="PlayerCharacter" type="CharacterBody3D"]
+input_ray_pickable = false
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+motion_mode = 1
+script = ExtResource("1_jj4dk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_a2uyt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_rkeh8")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0784766, 0.996916, 0, -0.996916, 0.0784766, 0, 0, 0, 1, 0.485088, 0.176356, 0)
+mesh = SubResource("PrismMesh_vw4wj")
