@@ -82,11 +82,30 @@ func _physics_process(delta):
 			if horizontal_speed < 0:
 				horizontal_speed = 0
 				
+		var mesh_xform := ($CharacterMesh as Node3D).get_transform()
+		var facing_mesh := -mesh_xform.basis[0].normalized()
+		facing_mesh = (facing_mesh - Vector3.UP * facing_mesh.dot(Vector3.UP)).normalized()
 
+		if horizontal_speed > 0:
+			facing_mesh = adjust_facing(
+				facing_mesh,
+				movement_dir,
+				delta,
+				1.0 / horizontal_speed * _turn_speed,
+				Vector3.UP
+			)
+		var m3 := Basis(
+			-facing_mesh,
+			Vector3.UP,
+			-facing_mesh.cross(Vector3.UP).normalized()
+		)
+
+		$CharacterMesh.set_transform(Transform3D(m3, mesh_xform.origin))
+				
 		velocity = horizontal_speed * horizontal_dir
 		move_and_slide()
 		
-		if(_device_input.is_action_just_pressed("blow") and _lung_capacity > 0.0):
+		if(_device_input.is_action_pressed("blow") and _lung_capacity > 0.0):
 			blowing.emit()
 			_lung_capacity -= BLOWING_DECAY
 			if _lung_capacity < 0:
