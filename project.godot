@@ -130,6 +130,16 @@ move_down={
 }
 
 [layer_names]
+<<<<<<< HEAD
+=======
+
+3d_physics/layer_1="Floor"
+3d_physics/layer_2="Player"
+3d_physics/layer_3="Bubble"
+3d_physics/layer_4="Arrow"
+
+[rendering]
+>>>>>>> 6f1c784 (Added 3d camera, dummy player for testing, 1 bubble and basic floor)
 
 3d_physics/layer_1="Floor"
 3d_physics/layer_2="Player"
