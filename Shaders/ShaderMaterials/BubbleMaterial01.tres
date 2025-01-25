@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b6dfao5kqnm3l"]
+
+[ext_resource type="Shader" path="res://Shaders/Bubble.gdshader" id="1_8ytq3"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_8ytq3")
