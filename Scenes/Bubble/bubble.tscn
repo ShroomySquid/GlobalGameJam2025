@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://pgo07hl7oibs"]
+
+[ext_resource type="Script" path="res://Scenes/Bubble/bubble.gd" id="1_kob1u"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3qtfd"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_irm2g"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_sbnex"]
+
+[node name="Bubble" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 11
+axis_lock_linear_y = true
+axis_lock_angular_y = true
+physics_material_override = SubResource("PhysicsMaterial_3qtfd")
+script = ExtResource("1_kob1u")
+
+[node name="BubbleCollision" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_irm2g")
+
+[node name="BubbleMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_sbnex")

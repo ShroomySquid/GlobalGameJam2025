@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7cybsrtj67rb"]
+
+[ext_resource type="Script" path="res://Scenes/Floor/floor.gd" id="1_6487y"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_82ukx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_egqmj"]
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dw7m2"]
+size = Vector3(2, 5, 2)
+
+[node name="Floor" type="MeshInstance3D"]
+transform = Transform3D(13.8862, 0, 0, 0, 0.96701, 0, 0, 0, 6.77952, 0.00696945, 0.0302334, -0.0318356)
+mesh = SubResource("PlaneMesh_82ukx")
+surface_material_override/0 = SubResource("StandardMaterial3D_egqmj")
+script = ExtResource("1_6487y")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(0.996054, 0, 0, 0, 0.996054, 0, 0, 0, 0.996054, 0, 2.49434, 0)
+shape = SubResource("BoxShape3D_dw7m2")
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
