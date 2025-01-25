@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://djd0sn88v1h6n"]
+
+[ext_resource type="PackedScene" uid="uid://cy7vpsr253j7a" path="res://Scenes/CoreScenes/Characters/PlayerCharacter.tscn" id="1_p8xwq"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2ufqs"]
+size = Vector2(100, 100)
+
+[sub_resource type="BoxMesh" id="BoxMesh_auh6r"]
+
+[node name="SolomarTestScene" type="Node3D"]
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("1_p8xwq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+axis_lock_linear_y = true
+axis_lock_linear_z = false
+axis_lock_angular_x = false
+axis_lock_angular_y = false
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.809335, 0.587347, 0, -0.587347, 0.809335, 0, 2.64824, 3.12324)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.618093, 0.373697, -0.691601, 0, 0.879781, 0.475379, 0.786105, -0.293828, 0.543787, 0, 3.66994, 12.0142)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.18143, 0)
+mesh = SubResource("PlaneMesh_2ufqs")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.999996, 0, -0.0026878, 0, 1, 0, 0.0026878, 0, 0.999996, -4.05751, 0.5, 0.217096)
+mesh = SubResource("BoxMesh_auh6r")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.999996, 0, -0.0026878, 0, 1, 0, 0.0026878, 0, 0.999996, 1.54092, 0.5, -4.25741)
+mesh = SubResource("BoxMesh_auh6r")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.999996, 0, -0.0026878, 0, 1, 0, 0.0026878, 0, 0.999996, 2.54825, 0.5, 0.834834)
+mesh = SubResource("BoxMesh_auh6r")
