@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://6l17ydketf4f" path="res://Scenes/Arrow/arrow_bubble.tscn" id="7_34n08"]
 [ext_resource type="Script" path="res://Scenes/CoreScenes/Game/game.gd" id="1_ntdck"]
 [ext_resource type="PackedScene" uid="uid://bwrhsav1b6hkf" path="res://Scenes/CoreScenes/Settings/settings.tscn" id="2_tpptn"]
+[ext_resource type="Script" path="res://Scenes/CoreScenes/Game/info_label.gd" id="3_ge7a4"]
 [ext_resource type="Script" path="res://Scenes/Dude/dude.gd" id="3_n4jml"]
 [ext_resource type="PackedScene" uid="uid://pgo07hl7oibs" path="res://Scenes/Bubble/bubble.tscn" id="4_eefs4"]
 [ext_resource type="PackedScene" uid="uid://b7cybsrtj67rb" path="res://Scenes/Floor/floor.tscn" id="4_m5sd4"]
@@ -94,7 +95,7 @@ fov = 70.0
 [node name="Dude" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
 process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.16749, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.20861, 1.16749, 0)
 mesh = SubResource("CapsuleMesh_hs7sc")
 script = ExtResource("3_n4jml")
 
