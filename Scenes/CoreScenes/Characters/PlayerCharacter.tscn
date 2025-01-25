@@ -4,9 +4,9 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_a2uyt"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rkeh8"]
-
 [sub_resource type="PrismMesh" id="PrismMesh_vw4wj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rkeh8"]
 
 [node name="PlayerCharacter" type="CharacterBody3D"]
 input_ray_pickable = false
@@ -16,12 +16,13 @@ axis_lock_angular_y = true
 motion_mode = 1
 script = ExtResource("1_jj4dk")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="CharacterMesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_a2uyt")
+
+[node name="Nose" type="MeshInstance3D" parent="CharacterMesh"]
+transform = Transform3D(-2.18557e-08, 0.5, -2.18557e-08, 0, -2.18557e-08, -0.5, -0.5, -2.18557e-08, 9.55343e-16, 0.5, 0.2, 0)
+mesh = SubResource("PrismMesh_vw4wj")
+skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_rkeh8")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.0784766, 0.996916, 0, -0.996916, 0.0784766, 0, 0, 0, 1, 0.485088, 0.176356, 0)
-mesh = SubResource("PrismMesh_vw4wj")
