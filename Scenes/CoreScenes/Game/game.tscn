@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b7cybsrtj67rb" path="res://Scenes/Floor/floor.tscn" id="4_m5sd4"]
 [ext_resource type="PackedScene" uid="uid://c1efa852smrvt" path="res://Scenes/Arrow/arrow_spawner.tscn" id="7_rnlhb"]
 [ext_resource type="PackedScene" uid="uid://cy7vpsr253j7a" path="res://Scenes/CoreScenes/Characters/PlayerCharacter.tscn" id="8_5bx0r"]
+
 [sub_resource type="Environment" id="Environment_duak3"]
 background_mode = 2
 background_energy_multiplier = 16.0
