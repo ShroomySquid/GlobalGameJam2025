@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1a0lfhx16sg2"]
+
+[ext_resource type="Script" path="res://Scenes/CoreScenes/start_screen.gd" id="1_dyk6e"]
+[ext_resource type="PackedScene" uid="uid://bwrhsav1b6hkf" path="res://Scenes/CoreScenes/Settings/settings.tscn" id="2_ulyj2"]
+
+[node name="StartScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dyk6e")
+
+[node name="BackgroundColor" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -1166.0
+offset_top = -497.0
+offset_right = 2422.0
+offset_bottom = 1367.0
+color = Color(0, 0, 0, 1)
+
+[node name="MenuContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.5
+offset_top = -43.0
+offset_right = 88.5
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartBtn" type="Button" parent="MenuContainer"]
+layout_mode = 2
+text = "Start
+"
+
+[node name="SettingsBtn" type="Button" parent="MenuContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="Settings" parent="." instance=ExtResource("2_ulyj2")]
+layout_mode = 1
+offset_left = 216.0
+offset_top = 178.0
+offset_right = -207.0
+offset_bottom = -112.0
+
+[connection signal="pressed" from="MenuContainer/StartBtn" to="." method="_on_start_btn_pressed"]
+[connection signal="pressed" from="MenuContainer/SettingsBtn" to="." method="_on_settings_btn_pressed"]
+[connection signal="exit_settings" from="Settings" to="." method="_on_settings_exit_settings"]

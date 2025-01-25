@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlyvi51d1hw1h"]
+
+[ext_resource type="Script" path="res://Scenes/CoreScenes/Control/control.gd" id="1_dttx2"]
+[ext_resource type="AudioStream" uid="uid://dk4dixgksotjc" path="res://Sound&Music/Le Reel Irlandais ou Bees Wax, Skin Sheep.mp3" id="2_afh41"]
+[ext_resource type="AudioStream" uid="uid://dkh644yviqjn" path="res://Sound&Music/dmg.wav" id="3_aya13"]
+
+[node name="Control" type="Node2D"]
+script = ExtResource("1_dttx2")
+
+[node name="MusicStream" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_afh41")
+volume_db = 5.0
+autoplay = true
+bus = &"Music"
+
+[node name="SFXtest" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_aya13")
+bus = &"SFX"

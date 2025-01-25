@@ -1,0 +1,170 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwrhsav1b6hkf"]
+
+[ext_resource type="Script" path="res://Scenes/CoreScenes/Settings/settings.gd" id="1_r3n6e"]
+
+[node name="Settings" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r3n6e")
+
+[node name="TopBtnContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="MainMenuBtn" type="Button" parent="TopBtnContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back to main menu"
+
+[node name="ApplyBtn" type="Button" parent="TopBtnContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Apply Change"
+
+[node name="MenuContainer" type="GridContainer" parent="."]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+columns = 2
+
+[node name="SoundLbl" type="Label" parent="MenuContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+text = "Sound"
+
+[node name="GraphicLbl" type="Label" parent="MenuContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 20
+text = "Graphics
+"
+
+[node name="BiggerSoundContainer" type="VBoxContainer" parent="MenuContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SoundContainer" type="GridContainer" parent="MenuContainer/BiggerSoundContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 10
+columns = 2
+
+[node name="MasterSoundLabel" type="Label" parent="MenuContainer/BiggerSoundContainer/SoundContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Master Volume"
+horizontal_alignment = 1
+
+[node name="MasterSoundSlider" type="HSlider" parent="MenuContainer/BiggerSoundContainer/SoundContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+value = 50.0
+
+[node name="MusicSoundLabel" type="Label" parent="MenuContainer/BiggerSoundContainer/SoundContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Music Volume"
+horizontal_alignment = 1
+
+[node name="MusicSoundSlider" type="HSlider" parent="MenuContainer/BiggerSoundContainer/SoundContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+value = 50.0
+
+[node name="SFXSoundLabel" type="Label" parent="MenuContainer/BiggerSoundContainer/SoundContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "SFX Volume"
+horizontal_alignment = 1
+
+[node name="SFXSoundSlider" type="HSlider" parent="MenuContainer/BiggerSoundContainer/SoundContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+value = 50.0
+
+[node name="MuteBackBtn" type="CheckButton" parent="MenuContainer/BiggerSoundContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Mute sound while game is in background"
+
+[node name="ScreenContainer" type="GridContainer" parent="MenuContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="ResolutionLbl" type="Label" parent="MenuContainer/ScreenContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Resolution"
+
+[node name="ResolutionDropDown" type="OptionButton" parent="MenuContainer/ScreenContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 5
+item_count = 15
+popup/item_0/text = "1024x576"
+popup/item_1/text = "1024x640"
+popup/item_1/id = 1
+popup/item_2/text = "1024x768"
+popup/item_2/id = 2
+popup/item_3/text = "1152x720"
+popup/item_3/id = 3
+popup/item_4/text = "1280x720"
+popup/item_4/id = 4
+popup/item_5/text = "1280x800"
+popup/item_5/id = 5
+popup/item_6/text = "1280x960"
+popup/item_6/id = 6
+popup/item_7/text = "1366x768"
+popup/item_7/id = 7
+popup/item_8/text = "1400x1050"
+popup/item_8/id = 8
+popup/item_9/text = "1440x1080"
+popup/item_9/id = 9
+popup/item_10/text = "1536x864"
+popup/item_10/id = 10
+popup/item_11/text = "1600x900"
+popup/item_11/id = 11
+popup/item_12/text = "1680x720"
+popup/item_12/id = 12
+popup/item_13/text = "1680x1050"
+popup/item_13/id = 13
+popup/item_14/text = "1920x1080"
+popup/item_14/id = 14
+
+[node name="FullscreenLbl" type="Label" parent="MenuContainer/ScreenContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Fullscreen"
+
+[node name="FullscreenBtn" type="CheckButton" parent="MenuContainer/ScreenContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="OtherLbl" type="Label" parent="MenuContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+text = "Other"
+
+[node name="InputMapLbl" type="Label" parent="MenuContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+text = "Input Map"
+
+[connection signal="pressed" from="TopBtnContainer/MainMenuBtn" to="." method="_on_main_menu_btn_pressed"]
+[connection signal="pressed" from="TopBtnContainer/ApplyBtn" to="." method="_on_apply_btn_pressed"]
+[connection signal="value_changed" from="MenuContainer/BiggerSoundContainer/SoundContainer/MasterSoundSlider" to="." method="_on_master_sound_slider_value_changed"]
+[connection signal="value_changed" from="MenuContainer/BiggerSoundContainer/SoundContainer/MusicSoundSlider" to="." method="_on_music_sound_slider_value_changed"]
+[connection signal="value_changed" from="MenuContainer/BiggerSoundContainer/SoundContainer/SFXSoundSlider" to="." method="_on_sfx_sound_slider_value_changed"]
+[connection signal="toggled" from="MenuContainer/BiggerSoundContainer/MuteBackBtn" to="." method="_on_mute_back_btn_toggled"]
+[connection signal="item_selected" from="MenuContainer/ScreenContainer/ResolutionDropDown" to="." method="_on_resolution_drop_down_item_selected"]
+[connection signal="toggled" from="MenuContainer/ScreenContainer/FullscreenBtn" to="." method="_on_fullscreen_btn_toggled"]
