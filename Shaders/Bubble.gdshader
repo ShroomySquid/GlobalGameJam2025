@@ -1,6 +1,9 @@
 // Available at: https://godotshaders.com/shader/distortion-bubble/
 shader_type spatial;
+<<<<<<< HEAD
 render_mode diffuse_toon;
+=======
+>>>>>>> bf8f8ce (Shader stuff)
 
 // fragment uniforms
 uniform float distortionView : hint_range(0.0, 0.3, 0.005) = 0.03;
@@ -9,7 +12,10 @@ uniform sampler2D noiseViewX;
 uniform sampler2D noiseViewY;
 uniform sampler2D screenTexture : hint_screen_texture;
 uniform vec3 tintColor : source_color;
+<<<<<<< HEAD
 uniform vec3 pulseColor : source_color;
+=======
+>>>>>>> bf8f8ce (Shader stuff)
 uniform float fesnelAmount : hint_range(0.0, 5.0, 0.1);
 uniform float pulse_frequency : hint_range(0.1, 10.0) = 2.0;
 
@@ -18,6 +24,7 @@ uniform float distortionVertex : hint_range(0.0, 0.3, 0.005) = 0.03;
 uniform float speedVertex : hint_range(0.0, 1.0, 0.005) = 0.1;
 uniform sampler2D noiseVertex;
 
+<<<<<<< HEAD
 uniform float scale : hint_range(0.1, 10.0) = 1.0;
 uniform float shield_power : hint_range(0.0, 1.0) = 0.8;
 uniform float rim_power : hint_range(0.0, 5.0) = 2.0;
@@ -37,6 +44,9 @@ float fbm(vec3 p) {
     }
     return value;
 }
+=======
+uniform float shield_power : hint_range(0.0, 1.0) = 0.8;
+>>>>>>> bf8f8ce (Shader stuff)
 
 float fresnel(float amount, vec3 normal, vec3 view)
 {
@@ -58,6 +68,7 @@ void fragment()
 	vec3 distortedScreenTexture = vec3(texture(screenTexture, SCREEN_UV + noiseDistort).rgb);
 	vec3 fesnelTint = (tintColor * fresnel(fesnelAmount, NORMAL, VIEW));
 	vec3 finalColor = distortedScreenTexture + fesnelTint;
+<<<<<<< HEAD
 
 
 	// Combine effects
@@ -81,5 +92,16 @@ void fragment()
     EMISSION = finalColor.rgb * shield_intensity;
     ALPHA = clamp(shield_intensity * 1.5, 0.0, 1.0);
     ROUGHNESS = 0.3;
+=======
+	ALBEDO = distortedScreenTexture + fesnelTint;
+	// material properties
+	float pulse = (sin(TIME * pulse_frequency) + 1.0) * 0.5;
+	float shield_intensity = mix(shield_power, 1.0, fresnel(fesnelAmount, NORMAL, VIEW));
+    shield_intensity *= mix(0.8, 1.2, noiseValueX);
+    shield_intensity *= mix(0.9, 1.1, pulse);
+    //EMISSION = finalColor.rgb * shield_intensity * 2.0;
+    ALPHA = clamp(shield_intensity * 1.5, 0.0, 1.0);
+    ROUGHNESS = 0.1;
+>>>>>>> bf8f8ce (Shader stuff)
     METALLIC = 0.8;
 }

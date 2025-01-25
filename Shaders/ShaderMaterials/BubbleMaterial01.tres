@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://b6dfao5kqnm3l"]
 
 [ext_resource type="Shader" path="res://Shaders/Bubble.gdshader" id="1_8ytq3"]
@@ -42,3 +43,12 @@ shader_parameter/rim_power = 1.5
 shader_parameter/noiseViewX = SubResource("NoiseTexture2D_22q4e")
 shader_parameter/noiseViewY = SubResource("NoiseTexture2D_h7rwv")
 shader_parameter/noiseVertex = SubResource("NoiseTexture2D_p2ivv")
+=======
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b6dfao5kqnm3l"]
+
+[ext_resource type="Shader" path="res://Shaders/Bubble.gdshader" id="1_8ytq3"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_8ytq3")
+>>>>>>> bf8f8ce (Shader stuff)
