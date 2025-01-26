@@ -1,6 +1,7 @@
 extends RigidBody3D
 
 var max_blow_str := 5
+
 @export var bubble_id : int
 
 signal bubble_hit

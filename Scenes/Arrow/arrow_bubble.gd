@@ -5,6 +5,12 @@ extends RigidBody3D
 func _ready():
 	pass # Replace with function body.
 
+<<<<<<< HEAD
+=======
+func _process(_delta):
+	pass
+
+>>>>>>> b4da592 (Simplified scoring signal, implemented on_impact function on bubble, character and arrow, made basic arrow generator)
 func _physics_process(delta):
 	position.x += speed * delta
 
