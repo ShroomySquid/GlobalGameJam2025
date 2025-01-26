@@ -76,8 +76,8 @@ func reset_game():
 	spawn_bubble(team_1_id, stage.team_one_bubble_spawn_point.position)
 	spawn_bubble(team_2_id, stage.team_two_bubble_spawn_point.position)
 	
-	spawn_player(1, team_1_id, stage.player_one_spawn_point)
-	spawn_player(2, team_2_id, stage.player_one_spawn_point)
+	spawn_player(0, team_1_id, stage.player_one_spawn_point.position)
+	spawn_player(1, team_2_id, stage.player_one_spawn_point.position)
 	
 	p1_score_label.text = str(p1_score)
 	p2_score_label.text = str(p2_score)
@@ -89,14 +89,17 @@ func spawn_bubble(bubble_id : int, start_pos):
 	new_bubble.bubble_id = bubble_id
 	stage.add_child(new_bubble)
 	new_bubble.position = start_pos
-	new_bubble.bubble_hit.connect()
+	new_bubble.bubble_hit.connect(scored)
 
-func spawn_player(player_id : int, team_id : int, start_pos):
+func spawn_player(device_id : int, team_id : int, start_pos):
 	var new_player = player_character.instantiate()
-	new_player.player_id = player_id
+	var bubble_group = get_tree().get_nodes_in_group("bubbles")
+	new_player._device_id = device_id
 	new_player.team_id = team_id
 	stage.add_child(new_player)
 	new_player.position = start_pos
+	for bubble_instance in bubble_group:
+		new_player.blowing.connect(bubble_instance.on_dude_blow)
 
 func scored(bubble_id : int, msg : String):
 	get_tree().call_group("arrows", "queue_free")

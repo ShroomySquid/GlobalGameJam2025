@@ -39,6 +39,7 @@ var _device_input : DeviceInput
 var _camera_basis : Transform3D
 
 func _ready():
+	print("player ready!")
 	_conditions = Conditions.NONE
 	set_device(_device_id)
 	await _device_input.connection_changed
@@ -112,7 +113,7 @@ func _physics_process(delta):
 		move_and_slide()
 		
 		if(_device_input.is_action_pressed("blow") and _lung_capacity > 0.0):
-			blowing.emit(team_id)
+			blowing.emit(global_position, team_id)
 			_lung_capacity -= BLOWING_DECAY
 			if _lung_capacity < 0:
 				_lung_capacity = 0
@@ -145,7 +146,6 @@ func adjust_facing(facing: Vector3, target: Vector3, step: float, adjust_rate: f
 	return (normal * cos(ang) + t * sin(ang)) * facing.length()
 
 func on_impact():
-	print("dude is hit!")
 	process_mode = 4
 	await get_tree().create_timer(1.0).timeout
-	process_mode = 0
+	process_mode = 1

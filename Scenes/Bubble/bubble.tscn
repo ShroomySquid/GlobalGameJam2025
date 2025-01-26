@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://pgo07hl7oibs"]
+[gd_scene load_steps=7 format=3 uid="uid://pgo07hl7oibs"]
 
 [ext_resource type="Script" path="res://Scenes/Bubble/bubble.gd" id="1_kob1u"]
 [ext_resource type="Material" uid="uid://b6dfao5kqnm3l" path="res://Shaders/ShaderMaterials/BubbleMaterial01.tres" id="2_y7ook"]
@@ -9,6 +9,8 @@
 
 [sub_resource type="SphereMesh" id="SphereMesh_sbnex"]
 material = ExtResource("2_y7ook")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_huv0n"]
 
 [node name="Bubble" type="RigidBody3D" groups=["bubbles"]]
 collision_layer = 4
@@ -23,3 +25,12 @@ shape = SubResource("SphereShape3D_irm2g")
 
 [node name="BubbleMesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_sbnex")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 10
+
+[node name="RamPopCollision" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_huv0n")
+
+[connection signal="body_entered" from="Area3D" to="." method="on_impact"]
