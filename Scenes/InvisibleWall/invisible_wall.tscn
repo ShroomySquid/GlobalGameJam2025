@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://b18nb2c7v2vox"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x3dys"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f2fxi"]
+size = Vector3(30, 1, 1)
+
+[node name="InvisibleWall" type="StaticBody3D"]
+collision_mask = 6
+physics_material_override = SubResource("PhysicsMaterial_x3dys")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_f2fxi")
