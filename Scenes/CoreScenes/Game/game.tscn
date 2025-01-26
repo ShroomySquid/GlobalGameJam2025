@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cubm8ayprtkdv"]
+[gd_scene load_steps=11 format=3 uid="uid://cubm8ayprtkdv"]
 
 [ext_resource type="Script" path="res://Scenes/CoreScenes/Game/game.gd" id="1_ntdck"]
 [ext_resource type="PackedScene" uid="uid://bwrhsav1b6hkf" path="res://Scenes/CoreScenes/Settings/settings.tscn" id="2_tpptn"]
@@ -6,7 +6,8 @@
 [ext_resource type="Script" path="res://Scenes/Dude/dude.gd" id="3_n4jml"]
 [ext_resource type="PackedScene" uid="uid://pgo07hl7oibs" path="res://Scenes/Bubble/bubble.tscn" id="4_eefs4"]
 [ext_resource type="PackedScene" uid="uid://b7cybsrtj67rb" path="res://Scenes/Floor/floor.tscn" id="4_m5sd4"]
-[ext_resource type="PackedScene" uid="uid://6l17ydketf4f" path="res://Scenes/Arrow/arrow_bubble.tscn" id="7_34n08"]
+[ext_resource type="PackedScene" uid="uid://c1efa852smrvt" path="res://Scenes/Arrow/arrow_spawner.tscn" id="7_rnlhb"]
+[ext_resource type="PackedScene" uid="uid://cy7vpsr253j7a" path="res://Scenes/CoreScenes/Characters/PlayerCharacter.tscn" id="8_5bx0r"]
 
 [sub_resource type="Environment" id="Environment_duak3"]
 background_mode = 2
@@ -134,7 +135,17 @@ text = "0"
 transform = Transform3D(3.56239, 0, 0, 0, 3.9527, 0, 0, 0, 0.999198, 0, 4.20922, -7.90994)
 text = "Score"
 
-[node name="ArrowBubble" parent="." instance=ExtResource("7_34n08")]
+[node name="ArrowSpawner" parent="." instance=ExtResource("7_rnlhb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.449, 0.7, 0)
+
+[node name="ArrowSpawner2" parent="." instance=ExtResource("7_rnlhb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.957, 0.7, -2)
+direction = 1
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("8_5bx0r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.05651, 1.4201, 0)
+collision_layer = 2
+collision_mask = 13
 
 [connection signal="pressed" from="CanvasLayer/PauseMargin/PauseBtn" to="." method="_on_pause_btn_pressed"]
 [connection signal="pressed" from="CanvasLayer/MenuContainer/SettingBtn" to="." method="_on_setting_btn_pressed"]
@@ -143,4 +154,6 @@ text = "Score"
 [connection signal="pressed" from="CanvasLayer/MenuContainer/QuitBtn" to="." method="_on_quit_btn_pressed"]
 [connection signal="exit_settings" from="CanvasLayer/Settings" to="." method="_on_settings_exit_settings"]
 [connection signal="Blow" from="Dude" to="Bubble1" method="_on_dude_blow"]
-[connection signal="bubble_exited_area" from="Floor" to="." method="_on_floor_bubble_exited_area"]
+[connection signal="bubble_exited_area" from="Floor" to="." method="scored"]
+[connection signal="bubble_hit" from="Bubble1" to="." method="scored"]
+[connection signal="bubble_hit" from="Bubble2" to="." method="scored"]

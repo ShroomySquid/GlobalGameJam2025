@@ -4,13 +4,6 @@ var min_scale = 0.3
 var duration = 0.5
 var transparency = 0
 
-func _ready():
-	#start()
-	pass # Replace with function body.
-
-func _process(_delta):
-	pass
-
 func message(new_msg : String, animation_dur : float):
 	modulate.a = 1
 	scale = Vector2(1, 1)
