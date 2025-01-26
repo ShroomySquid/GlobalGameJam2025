@@ -19,5 +19,7 @@ func shoot_arrow():
 		var new_arrow = arrow_scene.instantiate()
 		get_parent().get_parent().get_parent().add_child(new_arrow)
 		new_arrow.global_position = global_position
-		if direction > 0:
-			new_arrow.velocity = Vector3(50,0,0)
+		if direction == 0:
+			new_arrow.linear_velocity = Vector3(0,0,5)
+		else:
+			new_arrow.linear_velocity = Vector3(0,0,-5)
