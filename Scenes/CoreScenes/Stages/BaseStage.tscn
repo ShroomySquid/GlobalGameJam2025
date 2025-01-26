@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ktu4mwala53"]
+[gd_scene load_steps=5 format=3 uid="uid://ktu4mwala53"]
 
 [ext_resource type="PackedScene" uid="uid://13676pv2gu7v" path="res://Arena_02.fbx" id="1_csswv"]
 [ext_resource type="PackedScene" uid="uid://b7cybsrtj67rb" path="res://Scenes/Floor/floor.tscn" id="1_ct1j1"]
 [ext_resource type="Script" path="res://Scenes/CoreScenes/Stages/BaseStage.gd" id="1_nm4ix"]
+[ext_resource type="PackedScene" uid="uid://b18nb2c7v2vox" path="res://Scenes/InvisibleWall/invisible_wall.tscn" id="4_m8n1j"]
 
 [node name="BaseStage" type="Node3D" node_paths=PackedStringArray("player_one_spawn_point", "player_two_spawn_point", "player_three_spawn_point", "player_four_spawn_point", "team_one_bubble_spawn_point", "team_two_bubble_spawn_point")]
 script = ExtResource("1_nm4ix")
@@ -38,3 +39,17 @@ transform = Transform3D(0.947244, 0.152365, -0.281982, 3.08477e-08, 0.879782, 0.
 
 [node name="RightTeamBubbleSpawnPoint" type="Node3D" parent="."]
 transform = Transform3D(0.947244, 0.152365, -0.281982, 0.245934, -0.909701, 0.334604, -0.205538, -0.386301, -0.899181, 0, 0.401297, 14.6759)
+
+[node name="InvisibleWallContainer" type="Node3D" parent="."]
+
+[node name="InvisibleWall" parent="InvisibleWallContainer" instance=ExtResource("4_m8n1j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.409296, 0.42061, -7.46858)
+
+[node name="InvisibleWall2" parent="InvisibleWallContainer" instance=ExtResource("4_m8n1j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.409296, 0.42061, 19.4295)
+
+[node name="InvisibleWall3" parent="InvisibleWallContainer" instance=ExtResource("4_m8n1j")]
+transform = Transform3D(-0.00317649, 0, -0.999995, 0, 1, 0, 0.999995, 0, -0.00317649, 6.20788, 0.42061, 7.71657)
+
+[node name="InvisibleWall4" parent="InvisibleWallContainer" instance=ExtResource("4_m8n1j")]
+transform = Transform3D(-0.00317649, 0, -0.999995, 0, 1, 0, 0.999995, 0, -0.00317649, -6.94901, 0.42061, 7.71657)
