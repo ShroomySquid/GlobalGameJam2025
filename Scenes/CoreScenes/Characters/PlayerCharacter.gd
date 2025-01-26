@@ -142,6 +142,10 @@ func _physics_process(delta):
 				_lung_capacity = 0
 		else:
 			_lung_capacity += LUNG_REGEN_RATE * delta
+		
+		if(_device_input.is_action_pressed("attack") and _lung_capacity > 0.0):
+			$CharacterModelRoot/ArrowSpawner.shoot_arrow()
+			
 
 ## Adjust facing is taken from the Godot Project Platformer Demo
 ## https://github.com/godotengine/godot-demo-projects

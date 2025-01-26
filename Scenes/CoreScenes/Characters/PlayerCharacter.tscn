@@ -87,8 +87,6 @@ root_node = NodePath("../CharacterModelRoot/ImportedModel")
 tree_root = SubResource("AnimationNodeStateMachine_ldfrd")
 anim_player = NodePath("../CharacterModelRoot/ImportedModel/AnimationPlayer")
 
-[node name="ArrowSpawner" parent="." instance=ExtResource("3_5psm3")]
-
 [node name="CharacterModelRoot" type="Node3D" parent="."]
 
 [node name="ImportedModel" parent="CharacterModelRoot" instance=ExtResource("3_c52cq")]
@@ -171,5 +169,9 @@ bones/23/rotation = Quaternion(0.288964, 0.00971726, 0.0523319, 0.955859)
 bones/23/scale = Vector3(1, 1, 1)
 bones/24/position = Vector3(-1.21072e-08, 0.0670043, -1.52504e-08)
 
+[node name="ArrowSpawner" parent="CharacterModelRoot" instance=ExtResource("3_5psm3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.60288, 0.7, 0)
+
 [editable path="CharacterModelRoot/ImportedModel"]
 [editable path="CharacterModelRoot/ImportedModel_dep"]
+[editable path="CharacterModelRoot/ArrowSpawner"]

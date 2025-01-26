@@ -5,15 +5,19 @@ extends Node3D
 
 @export var direction : int
 
-func _ready():
-	shoot_arrow()
+var _attack_delay_timer : Timer
 
+func _ready():
+	_attack_delay_timer = Timer.new()
+	add_child(_attack_delay_timer)
+	_attack_delay_timer.wait_time = 1.0
+	_attack_delay_timer.one_shot = true
+	
 func shoot_arrow():
-	var new_arrow = arrow_scene.instantiate()
-	add_child(new_arrow)
-	new_arrow.position = position
-	if direction > 0:
-		new_arrow.speed *= -1
-	#new_arrow.arrow_impact.connect(game.on_arrow_hit)
-	await get_tree().create_timer(2.0).timeout
-	shoot_arrow()
+	if _attack_delay_timer.is_stopped():
+		_attack_delay_timer.start()
+		var new_arrow = arrow_scene.instantiate()
+		get_parent().get_parent().get_parent().add_child(new_arrow)
+		new_arrow.global_position = global_position
+		if direction > 0:
+			new_arrow.velocity = Vector3(50,0,0)
