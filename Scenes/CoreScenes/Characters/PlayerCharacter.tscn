@@ -84,9 +84,6 @@ mesh = SubResource("SphereMesh_1xr3o")
 root_node = NodePath("../CharacterModelRoot/ImportedModel")
 tree_root = SubResource("AnimationNodeStateMachine_ldfrd")
 anim_player = NodePath("../CharacterModelRoot/ImportedModel/AnimationPlayer")
-parameters/conditions/idle = false
-parameters/conditions/running = false
-parameters/conditions/walking = false
 
 [node name="CharacterModelRoot" type="Node3D" parent="."]
 
