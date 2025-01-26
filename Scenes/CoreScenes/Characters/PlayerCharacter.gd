@@ -42,6 +42,7 @@ func _ready():
 	_conditions = Conditions.NONE
 	set_device(_device_id)
 	await _device_input.connection_changed
+	print("device connected!")
 	_camera_basis = get_viewport().get_camera_3d().basis
 	_readied = true
 
