@@ -1,0 +1,13 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=5 format=3 uid="uid://dtma6ccs565m"]
+
+[ext_resource type="AudioStream" uid="uid://demvi2nrokm6u" path="res://Sound&Music/BubblePop/Blow_ownbubble/Blow_ownbubble01.wav" id="1_ee4p0"]
+[ext_resource type="AudioStream" uid="uid://rb1fuar48g2a" path="res://Sound&Music/BubblePop/Blow_ownbubble/Blow_ownbubble02.wav" id="2_qw353"]
+[ext_resource type="AudioStream" uid="uid://dnd7w6v1drg2b" path="res://Sound&Music/BubblePop/Blow_ownbubble/Blow_ownbubble03.wav" id="3_4tr0u"]
+[ext_resource type="AudioStream" uid="uid://ccblrva5wcwv1" path="res://Sound&Music/BubblePop/Blow_ownbubble/Blow_ownbubble04.wav" id="4_bw5ic"]
+
+[resource]
+streams_count = 4
+stream_0/stream = ExtResource("1_ee4p0")
+stream_1/stream = ExtResource("2_qw353")
+stream_2/stream = ExtResource("3_4tr0u")
+stream_3/stream = ExtResource("4_bw5ic")

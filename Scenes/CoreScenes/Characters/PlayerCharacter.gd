@@ -31,6 +31,9 @@ var team_id : int
 @export var _attack_speed := 2.0
 @export var _attack_scale := 1.0
 
+@export var impact_audio :  AudioStream
+@export var blow_audio : AudioStream
+
 var _conditions : Conditions
 
 var _readied := false
@@ -38,8 +41,7 @@ var _device_id : int = -1
 var _device_input : DeviceInput
 var _camera_basis : Transform3D
 
-@onready var get_hit_audio = $GetHitAudio
-@onready var blow_audio = $BlowAudio
+var _blow_stream : AudioStreamPlayer
 
 func _ready():
 	_conditions = Conditions.NONE
@@ -129,9 +131,12 @@ func _physics_process(delta):
 		move_and_slide()
 		
 		if(_device_input.is_action_pressed("blow") and _lung_capacity > 0.0):
-			blow_audio.play()
+			if _blow_stream:
+				if !_blow_stream.playing:
+					_blow_stream = SoundManager.play_sound(blow_audio)
+			else:
+				_blow_stream = SoundManager.play_sound(blow_audio)
 			blowing.emit(global_position, team_id)
-			
 			_lung_capacity -= BLOWING_DECAY
 			if _lung_capacity < 0:
 				_lung_capacity = 0
@@ -173,7 +178,5 @@ func set_to_running():
 	$CharacterModelRoot/ImportedModel/AnimationPlayer.play(&"Running_anim Retarget")
 
 func on_impact():
-	get_hit_audio.play()
-	process_mode = PROCESS_MODE_DISABLED
-	await get_tree().create_timer(1.0).timeout
-	process_mode = PROCESS_MODE_PAUSABLE
+	SoundManager.play_sound(impact_audio)
+	velocity = Vector3.ZERO

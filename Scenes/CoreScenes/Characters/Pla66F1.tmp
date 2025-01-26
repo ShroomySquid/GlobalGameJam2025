@@ -1,0 +1,114 @@
+[gd_scene load_steps=18 format=3 uid="uid://cy7vpsr253j7a"]
+
+[ext_resource type="Script" path="res://Scenes/CoreScenes/Characters/PlayerCharacter.gd" id="1_jj4dk"]
+[ext_resource type="Material" uid="uid://b6dfao5kqnm3l" path="res://Shaders/ShaderMaterials/BubbleMaterial01.tres" id="2_4fwfy"]
+[ext_resource type="PackedScene" uid="uid://bn3jl7fg7grwb" path="res://PlayerAnimations_Kasper/AnimLibrary04.glb" id="3_qobpa"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rkeh8"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_1xr3o"]
+material = ExtResource("2_4fwfy")
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_md6d0"]
+animation = &"BloWWithFlask Retarget"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_d8ag8"]
+animation = &"BlowNoFlask Retarget"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h7rly"]
+animation = &"Fall Retarget"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vdr5u"]
+animation = &"Idle Retarget"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_af0uf"]
+animation = &"Running_anim Retarget"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xo7bd"]
+animation = &"Sad Retarget"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hb3jr"]
+animation = &"Walking_Anim Retarget_001"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hxyco"]
+animation = &"Win Retarget"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jd41v"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s85em"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4pp6m"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ldfrd"]
+states/Attack/node = SubResource("AnimationNodeAnimation_md6d0")
+states/Attack/position = Vector2(204, 215.594)
+states/Attack2/node = SubResource("AnimationNodeAnimation_d8ag8")
+states/Attack2/position = Vector2(352, 215.078)
+states/Fall/node = SubResource("AnimationNodeAnimation_h7rly")
+states/Fall/position = Vector2(202.5, 307.5)
+states/Idle/node = SubResource("AnimationNodeAnimation_vdr5u")
+states/Idle/position = Vector2(56.75, 77.5)
+states/Running/node = SubResource("AnimationNodeAnimation_af0uf")
+states/Running/position = Vector2(510.965, 77.6172)
+states/Sad/node = SubResource("AnimationNodeAnimation_xo7bd")
+states/Sad/position = Vector2(56.9688, 215.336)
+states/Start/position = Vector2(56.8594, -19.625)
+states/Walking/node = SubResource("AnimationNodeAnimation_hb3jr")
+states/Walking/position = Vector2(260.336, 77.7344)
+states/Win/node = SubResource("AnimationNodeAnimation_hxyco")
+states/Win/position = Vector2(57.625, 309)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_jd41v"), "Idle", "Walking", SubResource("AnimationNodeStateMachineTransition_s85em"), "Walking", "Running", SubResource("AnimationNodeStateMachineTransition_4pp6m")]
+graph_offset = Vector2(-60, -75.467)
+
+[node name="PlayerCharacter" type="CharacterBody3D" groups=["characters"]]
+collision_layer = 2
+collision_mask = 13
+input_ray_pickable = false
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+motion_mode = 1
+script = ExtResource("1_jj4dk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_rkeh8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 1.92266, 0.433251, 0)
+mesh = SubResource("SphereMesh_1xr3o")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../CharacterModelRoot/ImportedModel")
+tree_root = SubResource("AnimationNodeStateMachine_ldfrd")
+anim_player = NodePath("../CharacterModelRoot/ImportedModel/AnimationPlayer")
+
+[node name="CharacterModelRoot" type="Node3D" parent="."]
+
+[node name="ImportedModel" parent="CharacterModelRoot" instance=ExtResource("3_qobpa")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -0.804291, 0)
+
+[node name="Skeleton3D" parent="CharacterModelRoot/ImportedModel/Player" index="0"]
+bones/4/rotation = Quaternion(0.0577213, -5.20802e-16, 1.25315e-16, 0.998333)
+bones/7/scale = Vector3(1, 1, 1)
+bones/8/rotation = Quaternion(-0.120417, 0.00451454, -0.0371916, 0.992016)
+bones/8/scale = Vector3(1, 1, 1)
+bones/9/rotation = Quaternion(-0.041026, -0.00193541, 0.0470813, 0.998046)
+bones/11/rotation = Quaternion(0.545096, -0.439864, 0.57929, 0.416909)
+bones/12/rotation = Quaternion(-0.115987, 0.000528944, -0.00452495, 0.99324)
+bones/13/rotation = Quaternion(-0.0407066, 0.00171618, -0.0420839, 0.998283)
+bones/13/scale = Vector3(1, 1, 1)
+bones/15/rotation = Quaternion(0.000168494, 0.0271856, 0.999609, -0.00648632)
+bones/16/rotation = Quaternion(-0.0798091, 0.00120618, -0.0150393, 0.996696)
+bones/17/scale = Vector3(1, 1, 1)
+bones/18/rotation = Quaternion(0.283825, 0.0378364, -0.0112122, 0.958064)
+bones/20/rotation = Quaternion(-0.000162862, 0.026103, 0.999638, 0.00648721)
+bones/20/scale = Vector3(1, 1, 1)
+bones/21/scale = Vector3(1, 1, 1)
+bones/22/rotation = Quaternion(0.52095, 0.0082247, -0.00502224, 0.853533)
+bones/23/rotation = Quaternion(0.282405, -0.0379706, 0.0111896, 0.958478)
+bones/23/scale = Vector3(1, 1, 1)
+
+[editable path="CharacterModelRoot/ImportedModel"]

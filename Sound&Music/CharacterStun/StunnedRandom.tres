@@ -1,0 +1,15 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=6 format=3 uid="uid://c7gfm8fixlhy7"]
+
+[ext_resource type="AudioStream" uid="uid://dsnuxhojte5dc" path="res://Sound&Music/CharacterStun/Character_stunned01.wav" id="1_8t7c8"]
+[ext_resource type="AudioStream" uid="uid://bcc4lqhy1m6ku" path="res://Sound&Music/CharacterStun/Character_stunned02.wav" id="2_jrwyx"]
+[ext_resource type="AudioStream" uid="uid://ca06vxsc8aati" path="res://Sound&Music/CharacterStun/Character_stunned03.wav" id="3_0d25l"]
+[ext_resource type="AudioStream" uid="uid://l2fbv8maxu3y" path="res://Sound&Music/CharacterStun/Character_stunned04.wav" id="4_t0862"]
+[ext_resource type="AudioStream" uid="uid://dpg5mnlu01lqs" path="res://Sound&Music/CharacterStun/Character_stunned05.wav" id="5_e5oap"]
+
+[resource]
+streams_count = 5
+stream_0/stream = ExtResource("1_8t7c8")
+stream_1/stream = ExtResource("2_jrwyx")
+stream_2/stream = ExtResource("3_0d25l")
+stream_3/stream = ExtResource("4_t0862")
+stream_4/stream = ExtResource("5_e5oap")

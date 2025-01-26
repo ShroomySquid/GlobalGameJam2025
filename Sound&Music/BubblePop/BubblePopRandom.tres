@@ -1,0 +1,13 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=5 format=3 uid="uid://b8be62ceslxfo"]
+
+[ext_resource type="AudioStream" uid="uid://dx5dd40hkt5o4" path="res://Sound&Music/BubblePop/Bubble_pop01.wav" id="1_dcoty"]
+[ext_resource type="AudioStream" uid="uid://c41j6dx6x0l2k" path="res://Sound&Music/BubblePop/Bubble_pop02.wav" id="2_as5f4"]
+[ext_resource type="AudioStream" uid="uid://bk3ond0n6rswv" path="res://Sound&Music/BubblePop/Bubble_pop03.wav" id="3_ju01u"]
+[ext_resource type="AudioStream" uid="uid://dr1eu0bau6mhv" path="res://Sound&Music/BubblePop/Bubble_pop04.wav" id="4_7gq0c"]
+
+[resource]
+streams_count = 4
+stream_0/stream = ExtResource("1_dcoty")
+stream_1/stream = ExtResource("2_as5f4")
+stream_2/stream = ExtResource("3_ju01u")
+stream_3/stream = ExtResource("4_7gq0c")

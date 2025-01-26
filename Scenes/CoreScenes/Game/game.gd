@@ -58,7 +58,7 @@ func reset_game():
 	spawn_bubble(team_2_id, stage.team_two_bubble_spawn_point.position)
 	
 	spawn_player(0, team_1_id, stage.player_one_spawn_point.position)
-	#spawn_player(1, team_2_id, stage.player_two_spawn_point.position)
+	spawn_player(1, team_2_id, stage.player_two_spawn_point.position)
 	
 	p1_score_label.text = str(p1_score)
 	p2_score_label.text = str(p2_score)
