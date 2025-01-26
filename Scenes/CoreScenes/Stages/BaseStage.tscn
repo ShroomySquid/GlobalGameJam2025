@@ -43,7 +43,7 @@ transform = Transform3D(0.947244, 0.152365, -0.281982, 0.245934, -0.909701, 0.33
 [node name="InvisibleWallContainer" type="Node3D" parent="."]
 
 [node name="InvisibleWall" parent="InvisibleWallContainer" instance=ExtResource("4_m8n1j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.409296, 0.42061, -7.46858)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.409296, 0.42061, 5.95822)
 
 [node name="InvisibleWall2" parent="InvisibleWallContainer" instance=ExtResource("4_m8n1j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.409296, 0.42061, 19.4295)
@@ -53,3 +53,6 @@ transform = Transform3D(-0.00317649, 0, -0.999995, 0, 1, 0, 0.999995, 0, -0.0031
 
 [node name="InvisibleWall4" parent="InvisibleWallContainer" instance=ExtResource("4_m8n1j")]
 transform = Transform3D(-0.00317649, 0, -0.999995, 0, 1, 0, 0.999995, 0, -0.00317649, -6.94901, 0.42061, 7.71657)
+
+[node name="InvisibleWall5" parent="InvisibleWallContainer" instance=ExtResource("4_m8n1j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.409296, 0.42061, -7.52161)

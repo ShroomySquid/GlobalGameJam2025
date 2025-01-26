@@ -1,16 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://dlyvi51d1hw1h"]
+[gd_scene load_steps=4 format=3 uid="uid://dlyvi51d1hw1h"]
 
 [ext_resource type="Script" path="res://Scenes/CoreScenes/Control/control.gd" id="1_dttx2"]
-[ext_resource type="AudioStream" uid="uid://dkh644yviqjn" path="res://Sound&Music/dmg.wav" id="3_aya13"]
+[ext_resource type="AudioStream" uid="uid://gbb0at4oiua5" path="res://Sound&Music/Music/Track01_v01d_with_intro.wav" id="2_3r067"]
+[ext_resource type="AudioStream" uid="uid://dx5dd40hkt5o4" path="res://Sound&Music/BubblePop/Bubble_pop01.wav" id="3_07ihi"]
 
 [node name="Control" type="Node2D"]
 script = ExtResource("1_dttx2")
 
 [node name="MusicStream" type="AudioStreamPlayer" parent="."]
-volume_db = -20.0
+stream = ExtResource("2_3r067")
+volume_db = 5.0
 autoplay = true
 bus = &"Music"
 
 [node name="SFXtest" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_aya13")
+stream = ExtResource("3_07ihi")
 bus = &"SFX"
