@@ -39,7 +39,6 @@ var _device_input : DeviceInput
 var _camera_basis : Transform3D
 
 func _ready():
-	print("player ready!")
 	_conditions = Conditions.NONE
 	set_device(_device_id)
 	await _device_input.connection_changed

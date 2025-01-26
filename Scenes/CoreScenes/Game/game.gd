@@ -22,37 +22,18 @@ const team_1_id := 1
 const team_2_id := 2
 
 func _ready():
+	reset_game()
+	#
+	#menu.hide()
+	#settings.hide()
+	#info_label.modulate.a = 0
+	#await get_tree().create_timer(0.5).timeout
+	#await reset_game()
+	#info_label.message("Go!", 1.5)
 
-	
-	menu.hide()
-	settings.hide()
-	info_label.modulate.a = 0
-	await get_tree().create_timer(0.5).timeout
-	await reset_game()
-	info_label.message("Go!", 1.5)
-
-func _process(_delta):
-	if Input.is_action_just_pressed("esc"):
-		pause_trigger()
 
 func pause_trigger():
-	if (is_paused):
-		if not settings.visible:
-			menu.visible = !menu.visible
-		else:
-			settings.visible = false
-		is_paused = false
-		Engine.time_scale = 1
-	else:
-		menu.visible = !menu.visible
-		Engine.time_scale = 0
-		is_paused = true
-
-func _on_pause_btn_pressed():
-		pause_trigger()
-
-func _on_resume_btn_pressed():
-		pause_trigger()
+	pass
 
 func _on_setting_btn_pressed():
 	menu.visible = !menu.visible
@@ -77,7 +58,7 @@ func reset_game():
 	spawn_bubble(team_2_id, stage.team_two_bubble_spawn_point.position)
 	
 	spawn_player(0, team_1_id, stage.player_one_spawn_point.position)
-	spawn_player(1, team_2_id, stage.player_one_spawn_point.position)
+	#spawn_player(1, team_2_id, stage.player_two_spawn_point.position)
 	
 	p1_score_label.text = str(p1_score)
 	p2_score_label.text = str(p2_score)
