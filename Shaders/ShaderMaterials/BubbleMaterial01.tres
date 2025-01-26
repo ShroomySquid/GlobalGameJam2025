@@ -1,44 +1,7 @@
-[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://b6dfao5kqnm3l"]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b6dfao5kqnm3l"]
 
 [ext_resource type="Shader" path="res://Shaders/Bubble.gdshader" id="1_8ytq3"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_v1ral"]
-noise_type = 2
-frequency = 0.005
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_p2ivv"]
-width = 256
-height = 256
-noise = SubResource("FastNoiseLite_v1ral")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_rffyu"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_22q4e"]
-width = 256
-height = 256
-noise = SubResource("FastNoiseLite_rffyu")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_b4g15"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_h7rwv"]
-width = 256
-height = 256
-noise = SubResource("FastNoiseLite_b4g15")
 
 [resource]
 render_priority = 0
 shader = ExtResource("1_8ytq3")
-shader_parameter/distortionView = 0.01
-shader_parameter/speedView = 0.01
-shader_parameter/tintColor = Color(0.776471, 0.862745, 0.898039, 1)
-shader_parameter/pulseColor = Color(0.815686, 0.784314, 0.905882, 1)
-shader_parameter/fesnelAmount = 1.5
-shader_parameter/pulse_frequency = 1.5
-shader_parameter/distortionVertex = 0.035
-shader_parameter/speedVertex = 0.2
-shader_parameter/scale = 1.0
-shader_parameter/shield_power = 0.955
-shader_parameter/rim_power = 1.5
-shader_parameter/noiseViewX = SubResource("NoiseTexture2D_22q4e")
-shader_parameter/noiseViewY = SubResource("NoiseTexture2D_h7rwv")
-shader_parameter/noiseVertex = SubResource("NoiseTexture2D_p2ivv")
