@@ -68,12 +68,13 @@ func reset_game():
 	await info_label.start()
 	dude.process_mode = 0
 
-func _on_floor_bubble_exited_area(bubble_id : int):
+func scored(bubble_id : int, msg : String):
+	get_tree().call_group("arrows", "queue_free")
 	dude.process_mode = 4
 	if bubble_id == 1:
 		p2_score += 1
 	else:
 		p1_score += 1
-	await info_label.message("Out!", 1.5)
+	await info_label.message(msg, 1.5)
 	await reset_game()
 	await info_label.message("Go!", 1.5)

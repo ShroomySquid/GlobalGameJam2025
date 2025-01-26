@@ -1,7 +1,10 @@
 extends RigidBody3D
 
 var max_blow_str := 5
+
 @export var bubble_id : int
+
+signal bubble_hit
 
 func _on_dude_blow(player_pos : Vector3, player_id : int):
 	var blow_dir : Vector2
@@ -26,3 +29,8 @@ func push_bubble(blow_dir : Vector2, blow_str : float):
 		blow_str -= 0.5
 		if blow_str < 0.5:
 			blow_str = 0
+
+func on_impact():
+	print("Bubble got hit by arrow!")
+	bubble_hit.emit(bubble_id, "Pop!")
+	# pop the bubble animation
