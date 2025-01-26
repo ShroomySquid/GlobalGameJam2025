@@ -1,0 +1,33 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://0ejd0pc1fe0s"]
+
+[ext_resource type="Shader" path="res://Shaders/StylizedLight.gdshader" id="1_ii6up"]
+
+[sub_resource type="Gradient" id="Gradient_vji4r"]
+interpolation_mode = 2
+interpolation_color_space = 1
+offsets = PackedFloat32Array(0, 0.472803, 1)
+colors = PackedColorArray(1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fmfn3"]
+gradient = SubResource("Gradient_vji4r")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dwa1h"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_x8g0o"]
+noise = SubResource("FastNoiseLite_dwa1h")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ii6up")
+shader_parameter/normal_smoothness = 0.011
+shader_parameter/light_ramp = SubResource("GradientTexture1D_fmfn3")
+shader_parameter/outline_position = Vector3(0, -0.25, -1)
+shader_parameter/normal_smoothness_outline = 0.1
+shader_parameter/outline_edge_a = 0.5
+shader_parameter/outline_edge_b = 0.5
+shader_parameter/outline_tone = Color(0, 0, 0, 1)
+shader_parameter/light_uv_scale = Vector2(1, 1)
+shader_parameter/shadow_texture = SubResource("NoiseTexture2D_x8g0o")
+shader_parameter/highlight_tone = Color(1, 1, 1, 1)
+shader_parameter/light_tone = Color(0.75, 0.75, 0.75, 1)
+shader_parameter/shadow_tone = Color(0.25, 0.25, 0.25, 1)

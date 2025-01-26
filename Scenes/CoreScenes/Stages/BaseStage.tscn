@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ktu4mwala53"]
+
+[ext_resource type="PackedScene" uid="uid://13676pv2gu7v" path="res://Arena_02.fbx" id="1_csswv"]
+
+[node name="BaseStage" type="Node3D"]
+
+[node name="Arena_02" parent="." instance=ExtResource("1_csswv")]
