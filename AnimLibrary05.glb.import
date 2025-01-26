@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bn3jl7fg7grwb"
-path="res://.godot/imported/AnimLibrary04.glb-356ab692453be148167c9766d83d4114.scn"
+uid="uid://dbhc1vqosrtas"
+path="res://.godot/imported/AnimLibrary05.glb-df44d140f7fb4c900a82e92e82d47119.scn"
 
 [deps]
 
-source_file="res://PlayerAnimations_Kasper/AnimLibrary04.glb"
-dest_files=["res://.godot/imported/AnimLibrary04.glb-356ab692453be148167c9766d83d4114.scn"]
+source_file="res://AnimLibrary05.glb"
+dest_files=["res://.godot/imported/AnimLibrary05.glb-df44d140f7fb4c900a82e92e82d47119.scn"]
 
 [params]
 
@@ -33,7 +33,7 @@ animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={
 "materials": {
-"@MATERIAL:0": {
+"Material.001": {
 "use_external/enabled": true,
 "use_external/path": "res://PlayerAnimations_Kasper/Material.001.tres"
 }

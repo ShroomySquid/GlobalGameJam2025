@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bc7lhq73kpx3x"]
+
+[ext_resource type="Texture2D" uid="uid://4s8xo8ns5k5g" path="res://AnimLibrary05_Body_Text_DIFFUSE.png" id="1_0gclx"]
+
+[resource]
+resource_name = "Material.001"
+cull_mode = 2
+albedo_texture = ExtResource("1_0gclx")
+roughness = 0.5
