@@ -13,6 +13,8 @@
 material = ExtResource("2_4fwfy")
 
 [node name="PlayerCharacter" type="CharacterBody3D" groups=["characters"]]
+collision_layer = 2
+collision_mask = 13
 input_ray_pickable = false
 axis_lock_linear_z = true
 axis_lock_angular_x = true

@@ -146,7 +146,6 @@ func adjust_facing(facing: Vector3, target: Vector3, step: float, adjust_rate: f
 	return (normal * cos(ang) + t * sin(ang)) * facing.length()
 
 func on_impact():
-	print("dude is hit!")
 	process_mode = 4
 	await get_tree().create_timer(1.0).timeout
-	process_mode = 0
+	process_mode = 1
