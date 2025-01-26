@@ -16,9 +16,9 @@ const SHARP_TURN_THRESHOLD = deg_to_rad(140.0)
 var player_id : int
 var team_id : int
 
-@export var _max_speed := 7.0
+@export var _max_speed := 3.0
 @export var _max_sprint_speed := 9.0
-@export var _acceleration_factor := 12.0
+@export var _acceleration_factor := 8.0
 @export var _sprint_acceleration_factor := 14.0
 @export var _deceleration_factor := 16.0
 @export var _turn_speed := 50.0
@@ -42,7 +42,6 @@ func _ready():
 	_conditions = Conditions.NONE
 	set_device(_device_id)
 	await _device_input.connection_changed
-	print("device connected!")
 	_camera_basis = get_viewport().get_camera_3d().basis
 	_readied = true
 
@@ -56,7 +55,6 @@ func _physics_process(delta):
 		elif _conditions & Conditions.SPRINTING:
 			_conditions = _conditions ^ Conditions.SPRINTING
 		print(_conditions)
-		
 		var horizontal_velocity := Vector3(velocity.x, 0, velocity.z)
 		var horizontal_dir := horizontal_velocity.normalized()
 		var horizontal_speed := horizontal_velocity.length()
@@ -82,14 +80,22 @@ func _physics_process(delta):
 			else:
 				horizontal_dir = movement_dir
 			
-			if horizontal_speed < _max_speed:
-				horizontal_speed += _acceleration_factor * delta
+			var current_max_speed = _max_speed
+			var current_acceleration = _acceleration_factor
+			if _conditions & Conditions.SPRINTING:
+				current_max_speed = _max_sprint_speed
+				current_acceleration = _sprint_acceleration_factor
+				
+			if horizontal_speed < current_max_speed:
+				horizontal_speed += current_acceleration * delta
+			elif horizontal_speed > current_max_speed:
+				horizontal_speed -= _deceleration_factor * delta
 		else:
 			horizontal_speed -= _deceleration_factor * delta
 			if horizontal_speed < 0:
 				horizontal_speed = 0
 				
-		var mesh_xform := ($CharacterMesh as Node3D).get_transform()
+		var mesh_xform := ($CharacterModelRoot as Node3D).get_transform()
 		var facing_mesh := -mesh_xform.basis[0].normalized()
 		facing_mesh = (facing_mesh - Vector3.UP * facing_mesh.dot(Vector3.UP)).normalized()
 
@@ -107,9 +113,16 @@ func _physics_process(delta):
 			-facing_mesh.cross(Vector3.UP).normalized()
 		)
 
-		$CharacterMesh.set_transform(Transform3D(m3, mesh_xform.origin))
+		$CharacterModelRoot.set_transform(Transform3D(m3, mesh_xform.origin))
 				
 		velocity = horizontal_speed * horizontal_dir
+		var velocity_magnitude = velocity.length()
+		if velocity_magnitude > 3.5:
+			set_to_running()
+		elif velocity_magnitude > 1.0:
+			set_to_walking()
+		else:
+			set_to_idle()
 		move_and_slide()
 		
 		if(_device_input.is_action_pressed("blow") and _lung_capacity > 0.0):
@@ -144,6 +157,15 @@ func adjust_facing(facing: Vector3, target: Vector3, step: float, adjust_rate: f
 	ang = (ang - a) * s
 
 	return (normal * cos(ang) + t * sin(ang)) * facing.length()
+	
+func set_to_idle():
+	$CharacterModelRoot/ImportedModel/AnimationPlayer.play(&"Idle Retarget")
+	
+func set_to_walking():
+	$CharacterModelRoot/ImportedModel/AnimationPlayer.play(&"Walking_Anim Retarget_001")
+	
+func set_to_running():
+	$CharacterModelRoot/ImportedModel/AnimationPlayer.play(&"Running_anim Retarget")
 
 func on_impact():
 	process_mode = 4

@@ -1,19 +1,69 @@
-[gd_scene load_steps=7 format=3 uid="uid://cy7vpsr253j7a"]
+[gd_scene load_steps=18 format=3 uid="uid://cy7vpsr253j7a"]
 
 [ext_resource type="Script" path="res://Scenes/CoreScenes/Characters/PlayerCharacter.gd" id="1_jj4dk"]
 [ext_resource type="Material" uid="uid://b6dfao5kqnm3l" path="res://Shaders/ShaderMaterials/BubbleMaterial01.tres" id="2_4fwfy"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_a2uyt"]
-
-[sub_resource type="PrismMesh" id="PrismMesh_vw4wj"]
+[ext_resource type="PackedScene" uid="uid://bn3jl7fg7grwb" path="res://PlayerAnimations_Kasper/AnimLibrary04.glb" id="3_qobpa"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rkeh8"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_1xr3o"]
 material = ExtResource("2_4fwfy")
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_md6d0"]
+animation = &"BloWWithFlask Retarget"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_d8ag8"]
+animation = &"BlowNoFlask Retarget"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h7rly"]
+animation = &"Fall Retarget"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vdr5u"]
+animation = &"Idle Retarget"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_af0uf"]
+animation = &"Running_anim Retarget"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xo7bd"]
+animation = &"Sad Retarget"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hb3jr"]
+animation = &"Walking_Anim Retarget_001"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hxyco"]
+animation = &"Win Retarget"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jd41v"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s85em"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4pp6m"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ldfrd"]
+states/Attack/node = SubResource("AnimationNodeAnimation_md6d0")
+states/Attack/position = Vector2(204, 215.594)
+states/Attack2/node = SubResource("AnimationNodeAnimation_d8ag8")
+states/Attack2/position = Vector2(352, 215.078)
+states/Fall/node = SubResource("AnimationNodeAnimation_h7rly")
+states/Fall/position = Vector2(202.5, 307.5)
+states/Idle/node = SubResource("AnimationNodeAnimation_vdr5u")
+states/Idle/position = Vector2(56.75, 77.5)
+states/Running/node = SubResource("AnimationNodeAnimation_af0uf")
+states/Running/position = Vector2(510.965, 77.6172)
+states/Sad/node = SubResource("AnimationNodeAnimation_xo7bd")
+states/Sad/position = Vector2(56.9688, 215.336)
+states/Start/position = Vector2(56.8594, -19.625)
+states/Walking/node = SubResource("AnimationNodeAnimation_hb3jr")
+states/Walking/position = Vector2(260.336, 77.7344)
+states/Win/node = SubResource("AnimationNodeAnimation_hxyco")
+states/Win/position = Vector2(57.625, 309)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_jd41v"), "Idle", "Walking", SubResource("AnimationNodeStateMachineTransition_s85em"), "Walking", "Running", SubResource("AnimationNodeStateMachineTransition_4pp6m")]
+graph_offset = Vector2(-60, -75.467)
+
 [node name="PlayerCharacter" type="CharacterBody3D" groups=["characters"]]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 collision_layer = 2
 collision_mask = 13
 input_ray_pickable = false
@@ -23,17 +73,57 @@ axis_lock_angular_y = true
 motion_mode = 1
 script = ExtResource("1_jj4dk")
 
-[node name="CharacterMesh" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_a2uyt")
-
-[node name="BackIndicator" type="MeshInstance3D" parent="CharacterMesh"]
-transform = Transform3D(-2.18557e-08, 0.5, -2.18557e-08, 0, -2.18557e-08, -0.5, -0.5, -2.18557e-08, 9.55343e-16, 0.5, 0.2, 0)
-mesh = SubResource("PrismMesh_vw4wj")
-skeleton = NodePath("../..")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_rkeh8")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 1.92266, 0.433251, 0)
 mesh = SubResource("SphereMesh_1xr3o")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../CharacterModelRoot/ImportedModel")
+tree_root = SubResource("AnimationNodeStateMachine_ldfrd")
+anim_player = NodePath("../CharacterModelRoot/ImportedModel/AnimationPlayer")
+parameters/conditions/idle = false
+parameters/conditions/running = false
+parameters/conditions/walking = false
+
+[node name="CharacterModelRoot" type="Node3D" parent="."]
+
+[node name="ImportedModel" parent="CharacterModelRoot" instance=ExtResource("3_qobpa")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -0.804291, 0)
+
+[node name="Skeleton3D" parent="CharacterModelRoot/ImportedModel/Player" index="0"]
+bones/0/position = Vector3(0.000630631, 0.0054633, -0.893115)
+bones/0/rotation = Quaternion(-0.672541, 0.00386873, 0.0448845, 0.738687)
+bones/1/rotation = Quaternion(-0.0149056, -0.00836148, -0.022692, 0.999596)
+bones/2/rotation = Quaternion(0.086244, -0.02093, -0.0196096, 0.995861)
+bones/3/rotation = Quaternion(0.0862442, -0.02093, -0.0196096, 0.995861)
+bones/4/rotation = Quaternion(-0.00755941, 0.0274697, 0.00358225, 0.999588)
+bones/5/position = Vector3(-1.11759e-08, 0.049369, -0.000670398)
+bones/5/rotation = Quaternion(-0.119447, 0.0692485, 0.037522, 0.989712)
+bones/7/position = Vector3(0.0595572, 0.126793, -0.00090805)
+bones/7/rotation = Quaternion(-0.624714, -0.363902, 0.573702, -0.384933)
+bones/8/position = Vector3(1.27787e-07, 0.125186, -5.42027e-08)
+bones/8/rotation = Quaternion(0.319805, -0.0105327, -0.148971, 0.93564)
+bones/9/position = Vector3(-1.86411e-07, 0.242255, -3.7903e-08)
+bones/9/rotation = Quaternion(0.119177, 0.00827213, 0.691859, 0.712081)
+bones/11/position = Vector3(-0.0595572, 0.127142, -0.00391113)
+bones/11/rotation = Quaternion(0.5835, -0.400053, 0.606214, 0.363305)
+bones/12/position = Vector3(-1.67679e-09, 0.125186, -7.63081e-08)
+bones/12/rotation = Quaternion(0.386016, -0.0535131, 0.269184, 0.88072)
+bones/13/rotation = Quaternion(0.164953, -0.0688903, -0.77005, 0.612428)
+bones/15/rotation = Quaternion(0.0478923, 0.204394, 0.976591, 0.0468887)
+bones/16/rotation = Quaternion(-0.492648, 0.0039665, 0.000378914, 0.87022)
+bones/17/position = Vector3(-9.74512e-09, 0.424181, -1.58447e-08)
+bones/17/rotation = Quaternion(0.695521, 0.000728276, 0.0131383, 0.718385)
+bones/18/rotation = Quaternion(0.371875, 0.0891421, -0.110268, 0.91739)
+bones/20/position = Vector3(-0.0941963, -0.0543981, -0.00965037)
+bones/20/rotation = Quaternion(-0.0389807, 0.357495, 0.93307, -0.00756814)
+bones/21/rotation = Quaternion(-0.806328, 0.0520293, -0.0984639, 0.58089)
+bones/22/position = Vector3(1.72935e-08, 0.424257, -1.8048e-08)
+bones/22/rotation = Quaternion(0.624132, -0.0120142, -0.0389142, 0.780257)
+bones/23/rotation = Quaternion(0.288964, 0.00971726, 0.0523319, 0.955859)
+bones/24/position = Vector3(-1.21072e-08, 0.0670043, -1.52504e-08)
+
+[editable path="CharacterModelRoot/ImportedModel"]
