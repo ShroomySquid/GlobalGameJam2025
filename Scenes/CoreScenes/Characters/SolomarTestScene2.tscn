@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbbx7gvqxdeg3"]
+[gd_scene load_steps=5 format=3 uid="uid://dbbx7gvqxdeg3"]
 
+[ext_resource type="PackedScene" uid="uid://d16mvnafysj62" path="res://Scenes/UI/LungsUI.tscn" id="1_igdul"]
 [ext_resource type="Shader" path="res://Shaders/VHSShader.gdshader" id="1_yeu0q"]
 [ext_resource type="PackedScene" uid="uid://djd0sn88v1h6n" path="res://Scenes/CoreScenes/Characters/SolomarTestScene.tscn" id="2_abak6"]
 
@@ -11,6 +12,10 @@ shader_parameter/smear = 1.5
 shader_parameter/blur_samples = 5
 
 [node name="Node" type="Node"]
+
+[node name="GameUI" type="CanvasLayer" parent="."]
+
+[node name="LungsUI" parent="GameUI" instance=ExtResource("1_igdul")]
 
 [node name="3DLayer" type="CanvasLayer" parent="."]
 layer = 2
