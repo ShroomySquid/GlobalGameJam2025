@@ -85,14 +85,14 @@ func spawn_player(device_id : int, team_id : int, start_pos):
 func scored(bubble_id : int, msg : String):
 	get_tree().call_group("arrows", "queue_free")
 	var player_group = get_tree().get_nodes_in_group("players")
-	for player_instance in player_group:
-		player_instance.process_mode = 4
+	#for player_instance in player_group:
+	#	player_instance.process_mode = 4
 	if bubble_id == 1:
 		p2_score += 1
 	else:
 		p1_score += 1
 	await info_label.message(msg, 1.5)
 	await reset_game()
-	for player_instance in player_group:
-		player_instance.process_mode = 1
+	#for player_instance in player_group:
+	#	player_instance.process_mode = 1
 	await info_label.message("Go!", 1.5)

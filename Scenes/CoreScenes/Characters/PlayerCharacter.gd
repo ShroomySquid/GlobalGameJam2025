@@ -38,6 +38,8 @@ var _device_id : int = -1
 var _device_input : DeviceInput
 var _camera_basis : Transform3D
 
+@onready var get_hit_audio = $GetHitAudio
+
 func _ready():
 	_conditions = Conditions.NONE
 	set_device(_device_id)
@@ -146,6 +148,7 @@ func adjust_facing(facing: Vector3, target: Vector3, step: float, adjust_rate: f
 	return (normal * cos(ang) + t * sin(ang)) * facing.length()
 
 func on_impact():
-	process_mode = 4
+	get_hit_audio.play()
+	process_mode = PROCESS_MODE_DISABLED
 	await get_tree().create_timer(1.0).timeout
-	process_mode = 1
+	process_mode = PROCESS_MODE_PAUSABLE
