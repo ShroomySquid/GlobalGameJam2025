@@ -54,6 +54,16 @@ func set_device(device: int):
 	_device_input = DeviceInput.new(device)
 	
 func _physics_process(delta):
+	#if Input.is_action_pressed("left"):
+		#position.z -= 0.1
+	#if Input.is_action_pressed("right"):
+		#position.z += 0.1
+	#if Input.is_action_pressed("up"):
+		#position.x += 0.1
+	#if Input.is_action_pressed("down"):
+		#position.x -= 0.1
+	#if Input.is_action_pressed("LeftClick"):
+		#blowing.emit(global_position, team_id)
 	if _readied:
 		if _device_input.is_action_pressed("sprint"):
 			_conditions = _conditions | Conditions.SPRINTING
