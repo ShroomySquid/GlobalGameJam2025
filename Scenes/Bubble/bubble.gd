@@ -34,7 +34,8 @@ func push_bubble(blow_dir : Vector2, blow_str : float):
 		if blow_str < 0.1:
 			blow_str = 0
 
-func on_impact():
+func on_impact(body):
+	queue_free()
 	bubble_hit.emit(bubble_id, "Pop!")
 	pop_sound.play()
 	# pop the bubble animation
