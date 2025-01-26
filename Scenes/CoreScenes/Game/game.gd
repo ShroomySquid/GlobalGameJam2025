@@ -65,16 +65,16 @@ func _on_retry_btn_pressed():
 	get_tree().change_scene_to_file("res://Scenes/CoreScenes/Game/game.tscn")
 
 func reset_game():
-	var stage = $"3DLayer/BaseStage" as TwoTeamStage
+	var stage = $"3DLayer/Stage" as TwoTeamStage
 	var left_team_bubble = bubble.instantiate()
-	left_team_bubble = 1
+	left_team_bubble.bubble_id = 1
 	stage.add_child(left_team_bubble)
-	left_team_bubble.position = stage.team_one_bubble_spawn_point
+	left_team_bubble.position = stage.team_one_bubble_spawn_point.position
 	
 	var right_team_bubble = bubble.instantiate()
-	left_team_bubble = 2
-	stage.add_child(left_team_bubble)
-	left_team_bubble.position = stage.team_two_bubble_spawn_point
+	right_team_bubble.bubble_id = 2
+	stage.add_child(right_team_bubble)
+	right_team_bubble.position = stage.team_two_bubble_spawn_point.position
 
 	p1_score_label.text = str(p1_score)
 	p2_score_label.text = str(p2_score)

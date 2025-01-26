@@ -111,45 +111,46 @@ script = ExtResource("3_fu4cd")
 [node name="Camera3D" parent="3DLayer" instance=ExtResource("4_28e1m")]
 transform = Transform3D(-4.37114e-08, 0.766044, -0.642788, 0, 0.642788, 0.766044, 1, 3.34849e-08, -2.80972e-08, -12.3479, 14.891, 12.5)
 
-[node name="BaseStage" parent="3DLayer" instance=ExtResource("5_getdo")]
+[node name="Stage" parent="3DLayer" instance=ExtResource("5_getdo")]
+unique_name_in_owner = true
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0.54678)
 
-[node name="ScoreBoard" type="MeshInstance3D" parent="3DLayer/BaseStage"]
+[node name="ScoreBoard" type="MeshInstance3D" parent="3DLayer/Stage"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.081, 0.457755, 5.98803)
 mesh = SubResource("BoxMesh_i28oj")
 
-[node name="P1Score" type="Label3D" parent="3DLayer/BaseStage/ScoreBoard"]
+[node name="P1Score" type="Label3D" parent="3DLayer/Stage/ScoreBoard"]
 unique_name_in_owner = true
 transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -0.6, 0.190794, -0.950906)
 text = "0"
 font_size = 70
 outline_size = 26
 
-[node name="P2Score" type="Label3D" parent="3DLayer/BaseStage/ScoreBoard"]
+[node name="P2Score" type="Label3D" parent="3DLayer/Stage/ScoreBoard"]
 unique_name_in_owner = true
 transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -0.6, 0.190794, 0.870706)
 text = "0"
 font_size = 70
 outline_size = 26
 
-[node name="ScoreBoardFrame" type="Node3D" parent="3DLayer/BaseStage/ScoreBoard"]
+[node name="ScoreBoardFrame" type="Node3D" parent="3DLayer/Stage/ScoreBoard"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="3DLayer/BaseStage/ScoreBoard/ScoreBoardFrame"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="3DLayer/Stage/ScoreBoard/ScoreBoardFrame"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.570887, -0.21488, 0)
 mesh = SubResource("BoxMesh_15ft4")
 skeleton = NodePath("../..")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="3DLayer/BaseStage/ScoreBoard/ScoreBoardFrame"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="3DLayer/Stage/ScoreBoard/ScoreBoardFrame"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.570887, 0.884124, 0.0189238)
 mesh = SubResource("BoxMesh_wx2bp")
 skeleton = NodePath("../..")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="3DLayer/BaseStage/ScoreBoard/ScoreBoardFrame"]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="3DLayer/Stage/ScoreBoard/ScoreBoardFrame"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.570887, -0.21488, 1.80708)
 mesh = SubResource("BoxMesh_15ft4")
 skeleton = NodePath("../..")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="3DLayer/BaseStage/ScoreBoard/ScoreBoardFrame"]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="3DLayer/Stage/ScoreBoard/ScoreBoardFrame"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.570887, -0.21488, -1.78037)
 mesh = SubResource("BoxMesh_15ft4")
 skeleton = NodePath("../..")
