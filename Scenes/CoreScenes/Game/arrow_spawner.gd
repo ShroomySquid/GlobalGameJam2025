@@ -10,7 +10,7 @@ var _attack_delay_timer : Timer
 func _ready():
 	_attack_delay_timer = Timer.new()
 	add_child(_attack_delay_timer)
-	_attack_delay_timer.wait_time = 1.0
+	_attack_delay_timer.wait_time = 3.0
 	_attack_delay_timer.one_shot = true
 	
 func shoot_arrow():

@@ -1,10 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://6l17ydketf4f"]
 
 [ext_resource type="Script" path="res://Scenes/Arrow/arrow_bubble.gd" id="1_jbcx3"]
+[ext_resource type="PackedScene" uid="uid://iqeok116j8jy" path="res://Arrow.fbx" id="2_x7et7"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hea5e"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_60sap"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dawdb"]
 
@@ -19,8 +18,8 @@ script = ExtResource("1_jbcx3")
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 shape = SubResource("SphereShape3D_hea5e")
 
-[node name="ArrowMesh" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_60sap")
+[node name="Arrow" parent="." instance=ExtResource("2_x7et7")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, -5.70744, -4.91497)
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 8

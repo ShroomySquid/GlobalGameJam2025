@@ -163,6 +163,7 @@ transform = Transform3D(0.947244, 0.152365, -0.281982, 3.08477e-08, 0.879782, 0.
 shadow_enabled = true
 
 [node name="VHSFilterLayer" parent="." instance=ExtResource("6_hcb71")]
+visible = false
 
 [connection signal="pressed" from="CanvasLayer/PauseMargin/PauseBtn" to="." method="_on_pause_btn_pressed"]
 [connection signal="pressed" from="CanvasLayer/MenuContainer/SettingBtn" to="." method="_on_setting_btn_pressed"]
