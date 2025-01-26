@@ -42,6 +42,7 @@ player_character = ExtResource("9_yta26")
 [node name="LungsUI" parent="CanvasLayer" instance=ExtResource("2_76how")]
 
 [node name="PauseMargin" type="MarginContainer" parent="CanvasLayer"]
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_constants/margin_left = 20
@@ -53,6 +54,7 @@ text = "Pause
 "
 
 [node name="MenuContainer" type="VBoxContainer" parent="CanvasLayer"]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -83,6 +85,7 @@ layout_mode = 2
 text = "Quit"
 
 [node name="Settings" parent="CanvasLayer" instance=ExtResource("2_ubhc7")]
+visible = false
 offset_left = 266.0
 offset_top = 204.0
 offset_right = -239.0

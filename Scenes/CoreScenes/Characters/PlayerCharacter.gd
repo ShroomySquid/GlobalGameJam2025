@@ -13,6 +13,9 @@ const LUNG_REGEN_RATE : float = 10.0
 const LUNG_REGEN_RATE_SLOW : float = 9.0
 const SHARP_TURN_THRESHOLD = deg_to_rad(140.0)
 
+var player_id : int
+var team_id : int
+
 @export var _max_speed := 7.0
 @export var _max_sprint_speed := 9.0
 @export var _acceleration_factor := 12.0
@@ -109,7 +112,7 @@ func _physics_process(delta):
 		move_and_slide()
 		
 		if(_device_input.is_action_pressed("blow") and _lung_capacity > 0.0):
-			blowing.emit()
+			blowing.emit(team_id)
 			_lung_capacity -= BLOWING_DECAY
 			if _lung_capacity < 0:
 				_lung_capacity = 0

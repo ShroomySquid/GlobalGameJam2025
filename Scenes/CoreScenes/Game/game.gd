@@ -17,6 +17,10 @@ extends Node3D
 @export var bubble : PackedScene
 @export var player_character : PackedScene # This would have to change if there was character choices
 
+@onready var stage = $"3DLayer/Stage" as TwoTeamStage
+const team_1_id := 1
+const team_2_id := 2
+
 func _ready():
 
 	
@@ -65,21 +69,34 @@ func _on_retry_btn_pressed():
 	get_tree().change_scene_to_file("res://Scenes/CoreScenes/Game/game.tscn")
 
 func reset_game():
-	var stage = $"3DLayer/Stage" as TwoTeamStage
-	var left_team_bubble = bubble.instantiate()
-	left_team_bubble.bubble_id = 1
-	stage.add_child(left_team_bubble)
-	left_team_bubble.position = stage.team_one_bubble_spawn_point.position
+	get_tree().call_group("bubbles", "queue_free")
+	get_tree().call_group("characters", "queue_free")
+	#var stage = $"3DLayer/Stage" as TwoTeamStage
 	
-	var right_team_bubble = bubble.instantiate()
-	right_team_bubble.bubble_id = 2
-	stage.add_child(right_team_bubble)
-	right_team_bubble.position = stage.team_two_bubble_spawn_point.position
-
+	spawn_bubble(team_1_id, stage.team_one_bubble_spawn_point.position)
+	spawn_bubble(team_2_id, stage.team_two_bubble_spawn_point.position)
+	
+	spawn_player(1, team_1_id, stage.player_one_spawn_point)
+	spawn_player(2, team_2_id, stage.player_one_spawn_point)
+	
 	p1_score_label.text = str(p1_score)
 	p2_score_label.text = str(p2_score)
 	await info_label.start()
 	#dude.process_mode = 0
+
+func spawn_bubble(bubble_id : int, start_pos):
+	var new_bubble = bubble.instantiate()
+	new_bubble.bubble_id = bubble_id
+	stage.add_child(new_bubble)
+	new_bubble.position = start_pos
+	new_bubble.bubble_hit.connect()
+
+func spawn_player(player_id : int, team_id : int, start_pos):
+	var new_player = player_character.instantiate()
+	new_player.player_id = player_id
+	new_player.team_id = team_id
+	stage.add_child(new_player)
+	new_player.position = start_pos
 
 func scored(bubble_id : int, msg : String):
 	get_tree().call_group("arrows", "queue_free")
