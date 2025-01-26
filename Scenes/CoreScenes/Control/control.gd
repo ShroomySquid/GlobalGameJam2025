@@ -6,6 +6,8 @@ func _ready():
 	pass # Replace with function body.
  
 func _process(_delta):
+	if !$MusicStream.playing:
+		$MusicStream.play()
 	if not get_viewport().has_focus() && not play_music_background:
 		AudioServer.set_bus_mute(0, true)
 	else:
