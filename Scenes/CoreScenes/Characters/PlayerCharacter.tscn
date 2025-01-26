@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cy7vpsr253j7a"]
+[gd_scene load_steps=9 format=3 uid="uid://cy7vpsr253j7a"]
 
 [ext_resource type="Script" path="res://Scenes/CoreScenes/Characters/PlayerCharacter.gd" id="1_jj4dk"]
 [ext_resource type="Material" uid="uid://b6dfao5kqnm3l" path="res://Shaders/ShaderMaterials/BubbleMaterial01.tres" id="2_4fwfy"]
 [ext_resource type="AudioStream" uid="uid://dsnuxhojte5dc" path="res://Sound&Music/CharacterStun/Character_stunned01.wav" id="3_arwig"]
+[ext_resource type="AudioStream" uid="uid://c4v1e6gkrkpex" path="res://Sound&Music/Blow_ownbubble/Blow_ownbubble01.wav" id="4_s5qtm"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_a2uyt"]
 
@@ -41,3 +42,6 @@ mesh = SubResource("SphereMesh_1xr3o")
 
 [node name="GetHitAudio" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_arwig")
+
+[node name="BlowAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_s5qtm")

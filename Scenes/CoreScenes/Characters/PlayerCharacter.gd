@@ -39,6 +39,7 @@ var _device_input : DeviceInput
 var _camera_basis : Transform3D
 
 @onready var get_hit_audio = $GetHitAudio
+@onready var blow_audio = $BlowAudio
 
 func _ready():
 	_conditions = Conditions.NONE
@@ -115,7 +116,9 @@ func _physics_process(delta):
 		move_and_slide()
 		
 		if(_device_input.is_action_pressed("blow") and _lung_capacity > 0.0):
+			blow_audio.play()
 			blowing.emit(global_position, team_id)
+			
 			_lung_capacity -= BLOWING_DECAY
 			if _lung_capacity < 0:
 				_lung_capacity = 0
