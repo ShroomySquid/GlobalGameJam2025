@@ -4,6 +4,8 @@ var max_blow_str := 5
 
 @export var bubble_id : int
 
+@onready var pop_sound = %PopStreamPlayer
+
 signal bubble_hit
 
 func on_dude_blow(player_pos : Vector3, player_id : int):
@@ -32,4 +34,5 @@ func push_bubble(blow_dir : Vector2, blow_str : float):
 
 func on_impact():
 	bubble_hit.emit(bubble_id, "Pop!")
+	pop_sound.play()
 	# pop the bubble animation
