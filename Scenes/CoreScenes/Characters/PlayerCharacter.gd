@@ -7,9 +7,9 @@ signal blowing
 
 enum Conditions{NONE=0, SPRINTING=1, EXHAUSTED=2, STUNNED=4}
 
-const BLOWING_DECAY : float = 10.0
+const BLOWING_DECAY : float = 4.0
 const SPRINT_DECAY : float = 10.0
-const LUNG_REGEN_RATE : float = 10.0
+const LUNG_REGEN_RATE : float = 8.0
 const LUNG_REGEN_RATE_SLOW : float = 9.0
 const SHARP_TURN_THRESHOLD = deg_to_rad(140.0)
 
@@ -137,9 +137,11 @@ func _physics_process(delta):
 			else:
 				_blow_stream = SoundManager.play_sound(blow_audio)
 			blowing.emit(global_position, team_id)
-			_lung_capacity -= BLOWING_DECAY
+			_lung_capacity -= BLOWING_DECAY * delta
 			if _lung_capacity < 0:
 				_lung_capacity = 0
+		else:
+			_lung_capacity += LUNG_REGEN_RATE * delta
 
 ## Adjust facing is taken from the Godot Project Platformer Demo
 ## https://github.com/godotengine/godot-demo-projects
