@@ -32,12 +32,13 @@ var _conditions : Conditions
 
 var _readied := false
 var _device_input : DeviceInput
+var _camera_basis : Transform3D
 
 func _ready():
 	_conditions = Conditions.NONE
 	set_device(0)
 	await _device_input.connection_changed
-
+	_camera_basis = get_viewport().get_camera_3d().basis
 	_readied = true
 
 func set_device(device: int):
@@ -55,8 +56,9 @@ func _physics_process(delta):
 		var horizontal_dir := horizontal_velocity.normalized()
 		var horizontal_speed := horizontal_velocity.length()
 		
-		var input_dir = _device_input.get_vector(&"move_left", &"move_right", &"move_up", &"move_down")
-		var movement_dir = Vector3(input_dir.x, 0.0, input_dir.y)
+		var input_dir := _device_input.get_vector(&"move_left", &"move_right", &"move_up", &"move_down")
+		var movement_dir := _camera_basis * Vector3(input_dir.x, 0.0, input_dir.y)
+		movement_dir.y = 0.0
 		movement_dir = movement_dir.normalized()
 		
 		var sharp_turn := horizontal_speed > 0.1 and \
