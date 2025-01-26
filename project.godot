@@ -135,3 +135,10 @@ move_down={
 3d_physics/layer_2="Player"
 3d_physics/layer_3="Bubble"
 3d_physics/layer_4="Arrow"
+
+[rendering]
+
+3d_physics/layer_1="Floor"
+3d_physics/layer_2="Player"
+3d_physics/layer_3="Bubble"
+3d_physics/layer_4="Arrow"
