@@ -4,9 +4,9 @@ extends Node3D
 
 @onready var menu = $CanvasLayer/MenuContainer
 @onready var settings = $CanvasLayer/Settings
-@onready var bubble1 = %Bubble1
-@onready var bubble2 = %Bubble2
-@onready var dude = %Dude
+#@onready var bubble1 = %Bubble1
+#@onready var bubble2 = %Bubble2
+#@onready var dude = %Dude
 @onready var p1_score_label = %P1Score
 @onready var p2_score_label = %P2Score
 @onready var info_label = %InfoLabel
@@ -14,7 +14,12 @@ extends Node3D
 @onready var p1_score := 0
 @onready var p2_score := 0
 
+@export var bubble : PackedScene
+@export var player_character : PackedScene # This would have to change if there was character choices
+
 func _ready():
+
+	
 	menu.hide()
 	settings.hide()
 	info_label.modulate.a = 0
@@ -60,17 +65,25 @@ func _on_retry_btn_pressed():
 	get_tree().change_scene_to_file("res://Scenes/CoreScenes/Game/game.tscn")
 
 func reset_game():
-	bubble1.position = Vector3(3.3, 1.0, 0)
-	bubble2.position = Vector3(-3.3, 1.0, 0)
-	dude.position = Vector3(6.3, 1.0, 0)
+	var stage = $"3DLayer/BaseStage" as TwoTeamStage
+	var left_team_bubble = bubble.instantiate()
+	left_team_bubble = 1
+	stage.add_child(left_team_bubble)
+	left_team_bubble.position = stage.team_one_bubble_spawn_point
+	
+	var right_team_bubble = bubble.instantiate()
+	left_team_bubble = 2
+	stage.add_child(left_team_bubble)
+	left_team_bubble.position = stage.team_two_bubble_spawn_point
+
 	p1_score_label.text = str(p1_score)
 	p2_score_label.text = str(p2_score)
 	await info_label.start()
-	dude.process_mode = 0
+	#dude.process_mode = 0
 
 func scored(bubble_id : int, msg : String):
 	get_tree().call_group("arrows", "queue_free")
-	dude.process_mode = 4
+	#dude.process_mode = 4
 	if bubble_id == 1:
 		p2_score += 1
 	else:

@@ -31,12 +31,13 @@ const SHARP_TURN_THRESHOLD = deg_to_rad(140.0)
 var _conditions : Conditions
 
 var _readied := false
+var _device_id : int = -1
 var _device_input : DeviceInput
 var _camera_basis : Transform3D
 
 func _ready():
 	_conditions = Conditions.NONE
-	set_device(0)
+	set_device(_device_id)
 	await _device_input.connection_changed
 	_camera_basis = get_viewport().get_camera_3d().basis
 	_readied = true

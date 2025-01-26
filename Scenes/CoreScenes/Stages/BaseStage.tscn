@@ -1,7 +1,40 @@
-[gd_scene load_steps=2 format=3 uid="uid://ktu4mwala53"]
+[gd_scene load_steps=4 format=3 uid="uid://ktu4mwala53"]
 
 [ext_resource type="PackedScene" uid="uid://13676pv2gu7v" path="res://Arena_02.fbx" id="1_csswv"]
+[ext_resource type="PackedScene" uid="uid://b7cybsrtj67rb" path="res://Scenes/Floor/floor.tscn" id="1_ct1j1"]
+[ext_resource type="Script" path="res://Scenes/CoreScenes/Stages/BaseStage.gd" id="1_nm4ix"]
 
-[node name="BaseStage" type="Node3D"]
+[node name="BaseStage" type="Node3D" node_paths=PackedStringArray("player_one_spawn_point", "player_two_spawn_point", "player_three_spawn_point", "player_four_spawn_point", "team_one_bubble_spawn_point", "team_two_bubble_spawn_point")]
+script = ExtResource("1_nm4ix")
+player_one_spawn_point = NodePath("SpawnPointPlayer1")
+player_two_spawn_point = NodePath("SpawnPointPlayer2")
+player_three_spawn_point = NodePath("SpawnPointPlayer3")
+player_four_spawn_point = NodePath("SpawnPointPlayer4")
+team_one_bubble_spawn_point = NodePath("LeftTeamBubbleSpawnPoint")
+team_two_bubble_spawn_point = NodePath("RightTeamBubbleSpawnPoint")
 
-[node name="Arena_02" parent="." instance=ExtResource("1_csswv")]
+[node name="LeftBubbleArea" parent="." instance=ExtResource("1_ct1j1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.178112)
+
+[node name="LeftBubbleArea2" parent="." instance=ExtResource("1_ct1j1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11.9803)
+
+[node name="Arena" parent="." instance=ExtResource("1_csswv")]
+
+[node name="SpawnPointPlayer1" type="Node3D" parent="."]
+transform = Transform3D(0.947244, 0.152365, -0.281982, 3.08477e-08, 0.879782, 0.475377, 0.320514, -0.450298, 0.833368, 0, 1.6777, 6.57942)
+
+[node name="SpawnPointPlayer2" type="Node3D" parent="."]
+transform = Transform3D(0.947244, 0.152365, -0.281982, 3.08477e-08, 0.879782, 0.475377, 0.320514, -0.450298, 0.833368, 0, 1.6777, 21.0414)
+
+[node name="SpawnPointPlayer3" type="Node3D" parent="."]
+transform = Transform3D(0.947244, 0.152365, -0.281982, 3.08477e-08, 0.879782, 0.475377, 0.320514, -0.450298, 0.833368, -5.4899, 1.6777, 0.431785)
+
+[node name="SpawnPointPlayer4" type="Node3D" parent="."]
+transform = Transform3D(0.947244, 0.152365, -0.281982, 3.08477e-08, 0.879782, 0.475377, 0.320514, -0.450298, 0.833368, -5.31921, 1.6777, 25.4987)
+
+[node name="LeftTeamBubbleSpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(0.947244, 0.152365, -0.281982, 3.08477e-08, 0.879782, 0.475377, 0.320514, -0.450298, 0.833368, 0, 1.6777, -5.43718)
+
+[node name="RightTeamBubbleSpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(0.947244, 0.152365, -0.281982, 3.08477e-08, 0.879782, 0.475377, 0.320514, -0.450298, 0.833368, 0, 1.6777, 29.1891)

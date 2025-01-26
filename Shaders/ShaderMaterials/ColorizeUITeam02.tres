@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://br1u0c7ga6abl"]
+
+[ext_resource type="Shader" path="res://Shaders/ColorizeUI.gdshader" id="1_xvp4h"]
+
+[resource]
+shader = ExtResource("1_xvp4h")
+shader_parameter/color = Color(1, 0.223529, 0.129412, 1)

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Touche pas à ma bulle"
-run/main_scene="res://Scenes/CoreScenes/Game/game.tscn"
+run/main_scene="res://Scenes/CoreScenes/Game/Main.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -20,6 +20,13 @@ config/icon="res://icon.svg"
 GlobalControl="*res://Scenes/CoreScenes/Control/Control.tscn"
 GlobalSignals="*res://GlobalSignals.gd"
 MultiplayerInput="*res://addons/multiplayer_input/multiplayer_input.gd"
+
+[debug]
+
+shapes/navigation/geometry_edge_color=Color(0.0486, 0.58158, 0.81, 1)
+shapes/navigation/geometry_face_color=Color(0, 0.6, 0.6, 0.698039)
+shapes/navigation/geometry_face_disabled_color=Color(0.454902, 0.454902, 0.454902, 0.713726)
+shapes/collision/shape_color=Color(7.9897e-06, 0.690582, 0.806644, 0.741176)
 
 [display]
 

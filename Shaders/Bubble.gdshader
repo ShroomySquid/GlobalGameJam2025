@@ -9,6 +9,7 @@ uniform sampler2D noiseViewX;
 uniform sampler2D noiseViewY;
 uniform sampler2D screenTexture : hint_screen_texture;
 uniform vec3 tintColor : source_color;
+uniform vec3 pulseColor : source_color;
 uniform float fesnelAmount : hint_range(0.0, 5.0, 0.1);
 uniform float pulse_frequency : hint_range(0.1, 10.0) = 2.0;
 
@@ -36,7 +37,6 @@ float fbm(vec3 p) {
     }
     return value;
 }
-uniform float shield_power : hint_range(0.0, 1.0) = 0.8;
 
 float fresnel(float amount, vec3 normal, vec3 view)
 {
@@ -61,26 +61,6 @@ void fragment()
 
 
 	// Combine effects
-	float pulse = (sin(TIME * pulse_frequency) + 1.0) * 0.5;
-	vec3 noise_pos = VERTEX * scale + vec3(0.0, 0.0, TIME * speedView);
-    float noise_val = fbm(noise_pos);
-	vec3 view_dir = normalize(VIEW);
-    vec3 normal = normalize(NORMAL);
-	float fresnelPulse = pow(1.0 - dot(normal, view_dir), rim_power);
-    float shield_intensity = mix(shield_power, 1.0, fresnelPulse);
-    shield_intensity *= mix(0.8, 1.2, noise_val);
-    shield_intensity *= mix(0.9, 1.1, pulse);
-    
-    // Color mixing
-    vec3 final_color = mix(finalColor, pulseColor, pulse * 0.5);
-    final_color.rgb *= shield_intensity;
-    
-	
-	ALBEDO =  final_color.rgb;
-	// material properties
-    EMISSION = finalColor.rgb * shield_intensity;
-    ALPHA = clamp(shield_intensity * 1.5, 0.0, 1.0);
-    ROUGHNESS = 0.3;
 	float pulse = (sin(TIME * pulse_frequency) + 1.0) * 0.5;
 	vec3 noise_pos = VERTEX * scale + vec3(0.0, 0.0, TIME * speedView);
     float noise_val = fbm(noise_pos);

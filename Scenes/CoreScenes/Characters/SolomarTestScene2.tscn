@@ -1,15 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dbbx7gvqxdeg3"]
+[gd_scene load_steps=4 format=3 uid="uid://dbbx7gvqxdeg3"]
 
 [ext_resource type="PackedScene" uid="uid://d16mvnafysj62" path="res://Scenes/UI/LungsUI.tscn" id="1_igdul"]
-[ext_resource type="Shader" path="res://Shaders/VHSShader.gdshader" id="1_yeu0q"]
 [ext_resource type="PackedScene" uid="uid://djd0sn88v1h6n" path="res://Scenes/CoreScenes/Characters/SolomarTestScene.tscn" id="2_abak6"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4dvn1"]
-shader = ExtResource("1_yeu0q")
-shader_parameter/wiggle = 0.1
-shader_parameter/wiggle_speed = 10.0
-shader_parameter/smear = 1.5
-shader_parameter/blur_samples = 5
+[ext_resource type="PackedScene" uid="uid://e5hieqsnx1ys" path="res://Scenes/VisualEffects/VHSFilterLayer.tscn" id="3_edfcl"]
 
 [node name="Node" type="Node"]
 
@@ -22,12 +15,4 @@ layer = 2
 
 [node name="SolomarTestScene" parent="3DLayer" instance=ExtResource("2_abak6")]
 
-[node name="VHSFilterLayer" type="CanvasLayer" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="VHSFilterLayer"]
-material = SubResource("ShaderMaterial_4dvn1")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="VHSFilterLayer" parent="." instance=ExtResource("3_edfcl")]

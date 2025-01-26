@@ -1,4 +1,4 @@
-extends MeshInstance3D
+extends Node3D
 
 signal bubble_exited_area
 

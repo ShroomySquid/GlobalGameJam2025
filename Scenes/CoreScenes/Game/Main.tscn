@@ -1,0 +1,168 @@
+[gd_scene load_steps=15 format=3 uid="uid://cubm8ayprtkdv"]
+
+[ext_resource type="Script" path="res://Scenes/CoreScenes/Game/game.gd" id="1_2r3dl"]
+[ext_resource type="PackedScene" uid="uid://d16mvnafysj62" path="res://Scenes/UI/LungsUI.tscn" id="2_76how"]
+[ext_resource type="PackedScene" uid="uid://bwrhsav1b6hkf" path="res://Scenes/CoreScenes/Settings/settings.tscn" id="2_ubhc7"]
+[ext_resource type="Script" path="res://Scenes/CoreScenes/Game/info_label.gd" id="3_fu4cd"]
+[ext_resource type="PackedScene" uid="uid://c1wvmr34mm5bk" path="res://Scenes/VisualEffects/LineFilterCamera3D.tscn" id="4_28e1m"]
+[ext_resource type="PackedScene" uid="uid://ktu4mwala53" path="res://Scenes/CoreScenes/Stages/BaseStage.tscn" id="5_getdo"]
+[ext_resource type="PackedScene" uid="uid://e5hieqsnx1ys" path="res://Scenes/VisualEffects/VHSFilterLayer.tscn" id="6_hcb71"]
+[ext_resource type="Material" uid="uid://dcldte1viio1i" path="res://Scenes/CoreScenes/Stages/Walls.tres" id="7_d1o73"]
+[ext_resource type="PackedScene" uid="uid://pgo07hl7oibs" path="res://Scenes/Bubble/bubble.tscn" id="7_onrcq"]
+[ext_resource type="PackedScene" uid="uid://cy7vpsr253j7a" path="res://Scenes/CoreScenes/Characters/PlayerCharacter.tscn" id="9_yta26"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_i28oj"]
+material = ExtResource("7_d1o73")
+size = Vector3(1, 2, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_787lr"]
+diffuse_mode = 1
+specular_mode = 1
+albedo_color = Color(0.83, 0.648645, 0.2573, 1)
+metallic = 0.25
+metallic_specular = 0.65
+roughness = 0.6
+emission_energy_multiplier = 4.45
+
+[sub_resource type="BoxMesh" id="BoxMesh_15ft4"]
+material = SubResource("StandardMaterial3D_787lr")
+size = Vector3(0.4, 2, 0.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wx2bp"]
+material = SubResource("StandardMaterial3D_787lr")
+size = Vector3(0.4, 4, 0.2)
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_2r3dl")
+bubble = ExtResource("7_onrcq")
+player_character = ExtResource("9_yta26")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="LungsUI" parent="CanvasLayer" instance=ExtResource("2_76how")]
+
+[node name="PauseMargin" type="MarginContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+
+[node name="PauseBtn" type="Button" parent="CanvasLayer/PauseMargin"]
+layout_mode = 2
+text = "Pause
+"
+
+[node name="MenuContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SettingBtn" type="Button" parent="CanvasLayer/MenuContainer"]
+layout_mode = 2
+text = "Settings
+"
+
+[node name="ResumeBtn" type="Button" parent="CanvasLayer/MenuContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="RetryBtn" type="Button" parent="CanvasLayer/MenuContainer"]
+layout_mode = 2
+text = "Retry"
+
+[node name="QuitBtn" type="Button" parent="CanvasLayer/MenuContainer"]
+layout_mode = 2
+text = "Quit"
+
+[node name="Settings" parent="CanvasLayer" instance=ExtResource("2_ubhc7")]
+offset_left = 266.0
+offset_top = 204.0
+offset_right = -239.0
+offset_bottom = -105.0
+
+[node name="InfoLabel" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.5
+offset_top = -87.5
+offset_right = 36.5
+offset_bottom = 87.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 128
+text = "3"
+script = ExtResource("3_fu4cd")
+
+[node name="3DLayer" type="CanvasLayer" parent="."]
+
+[node name="Camera3D" parent="3DLayer" instance=ExtResource("4_28e1m")]
+transform = Transform3D(-4.37114e-08, 0.766044, -0.642788, 0, 0.642788, 0.766044, 1, 3.34849e-08, -2.80972e-08, -12.3479, 14.891, 12.5)
+
+[node name="BaseStage" parent="3DLayer" instance=ExtResource("5_getdo")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0.54678)
+
+[node name="ScoreBoard" type="MeshInstance3D" parent="3DLayer/BaseStage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.081, 0.457755, 5.98803)
+mesh = SubResource("BoxMesh_i28oj")
+
+[node name="P1Score" type="Label3D" parent="3DLayer/BaseStage/ScoreBoard"]
+unique_name_in_owner = true
+transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -0.6, 0.190794, -0.950906)
+text = "0"
+font_size = 70
+outline_size = 26
+
+[node name="P2Score" type="Label3D" parent="3DLayer/BaseStage/ScoreBoard"]
+unique_name_in_owner = true
+transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -0.6, 0.190794, 0.870706)
+text = "0"
+font_size = 70
+outline_size = 26
+
+[node name="ScoreBoardFrame" type="Node3D" parent="3DLayer/BaseStage/ScoreBoard"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="3DLayer/BaseStage/ScoreBoard/ScoreBoardFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.570887, -0.21488, 0)
+mesh = SubResource("BoxMesh_15ft4")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="3DLayer/BaseStage/ScoreBoard/ScoreBoardFrame"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.570887, 0.884124, 0.0189238)
+mesh = SubResource("BoxMesh_wx2bp")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="3DLayer/BaseStage/ScoreBoard/ScoreBoardFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.570887, -0.21488, 1.80708)
+mesh = SubResource("BoxMesh_15ft4")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="3DLayer/BaseStage/ScoreBoard/ScoreBoardFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.570887, -0.21488, -1.78037)
+mesh = SubResource("BoxMesh_15ft4")
+skeleton = NodePath("../..")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="3DLayer"]
+transform = Transform3D(0.947244, 0.152365, -0.281982, 3.08477e-08, 0.879782, 0.475377, 0.320514, -0.450298, 0.833368, 0, 3.66994, 12.0142)
+shadow_enabled = true
+
+[node name="VHSFilterLayer" parent="." instance=ExtResource("6_hcb71")]
+
+[connection signal="pressed" from="CanvasLayer/PauseMargin/PauseBtn" to="." method="_on_pause_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuContainer/SettingBtn" to="." method="_on_setting_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuContainer/ResumeBtn" to="." method="_on_resume_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuContainer/RetryBtn" to="." method="_on_retry_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuContainer/QuitBtn" to="." method="_on_quit_btn_pressed"]
+[connection signal="exit_settings" from="CanvasLayer/Settings" to="." method="_on_settings_exit_settings"]
