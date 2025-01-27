@@ -25,6 +25,7 @@ script = ExtResource("1_kob1u")
 shape = SubResource("SphereShape3D_irm2g")
 
 [node name="BubbleMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 mesh = SubResource("SphereMesh_sbnex")
 
 [node name="Area3D" type="Area3D" parent="."]

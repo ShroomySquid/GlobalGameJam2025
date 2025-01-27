@@ -40,6 +40,10 @@ _subresources={
 "Arena_02:LightBlue": {
 "use_external/enabled": true,
 "use_external/path": "res://Scenes/CoreScenes/Stages/Center.tres"
+},
+"Arena_02:White": {
+"use_external/enabled": true,
+"use_external/path": "res://Scenes/CoreScenes/Stages/Flooring.tres"
 }
 }
 }

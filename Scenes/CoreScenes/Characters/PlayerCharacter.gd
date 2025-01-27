@@ -46,7 +46,8 @@ var _blow_stream : AudioStreamPlayer
 func _ready():
 	_conditions = Conditions.NONE
 	set_device(_device_id)
-	await _device_input.connection_changed
+	if !_device_input.is_keyboard():
+		await _device_input.connection_changed
 	_camera_basis = get_viewport().get_camera_3d().basis
 	_readied = true
 
@@ -54,16 +55,6 @@ func set_device(device: int):
 	_device_input = DeviceInput.new(device)
 	
 func _physics_process(delta):
-	#if Input.is_action_pressed("left"):
-		#position.z -= 0.1
-	#if Input.is_action_pressed("right"):
-		#position.z += 0.1
-	#if Input.is_action_pressed("up"):
-		#position.x += 0.1
-	#if Input.is_action_pressed("down"):
-		#position.x -= 0.1
-	#if Input.is_action_pressed("LeftClick"):
-		#blowing.emit(global_position, team_id)
 	if _readied:
 		if _device_input.is_action_pressed("sprint"):
 			_conditions = _conditions | Conditions.SPRINTING
@@ -82,80 +73,86 @@ func _physics_process(delta):
 		var sharp_turn := horizontal_speed > 0.1 and \
 			acos(movement_dir.dot(horizontal_dir)) > SHARP_TURN_THRESHOLD
 				
-		# TODO: Do we handle sharp turns in a special way?
-		if movement_dir.length() > 0.1 and not sharp_turn:
-			if horizontal_speed > 0.001:
-				horizontal_dir = adjust_facing(
-					horizontal_dir,
+		if !_conditions & Conditions.STUNNED:
+			if movement_dir.length() > 0.1 and not sharp_turn:
+				if horizontal_speed > 0.001:
+					horizontal_dir = adjust_facing(
+						horizontal_dir,
+						movement_dir,
+						delta,
+						1.0 / horizontal_speed * _turn_speed,
+						Vector3.UP
+					)
+				else:
+					horizontal_dir = movement_dir
+				
+				var current_max_speed = _max_speed
+				var current_acceleration = _acceleration_factor
+				if _conditions & Conditions.SPRINTING:
+					current_max_speed = _max_sprint_speed
+					current_acceleration = _sprint_acceleration_factor
+					
+				if horizontal_speed < current_max_speed:
+					horizontal_speed += current_acceleration * delta
+				elif horizontal_speed > current_max_speed:
+					horizontal_speed -= _deceleration_factor * delta
+			else:
+				horizontal_speed -= _deceleration_factor * delta
+				if horizontal_speed < 0:
+					horizontal_speed = 0
+					
+			var mesh_xform := ($CharacterModelRoot as Node3D).get_transform()
+			var facing_mesh := -mesh_xform.basis[0].normalized()
+			facing_mesh = (facing_mesh - Vector3.UP * facing_mesh.dot(Vector3.UP)).normalized()
+
+			if horizontal_speed > 0:
+				facing_mesh = adjust_facing(
+					facing_mesh,
 					movement_dir,
 					delta,
 					1.0 / horizontal_speed * _turn_speed,
 					Vector3.UP
 				)
-			else:
-				horizontal_dir = movement_dir
-			
-			var current_max_speed = _max_speed
-			var current_acceleration = _acceleration_factor
-			if _conditions & Conditions.SPRINTING:
-				current_max_speed = _max_sprint_speed
-				current_acceleration = _sprint_acceleration_factor
-				
-			if horizontal_speed < current_max_speed:
-				horizontal_speed += current_acceleration * delta
-			elif horizontal_speed > current_max_speed:
-				horizontal_speed -= _deceleration_factor * delta
-		else:
-			horizontal_speed -= _deceleration_factor * delta
-			if horizontal_speed < 0:
-				horizontal_speed = 0
-				
-		var mesh_xform := ($CharacterModelRoot as Node3D).get_transform()
-		var facing_mesh := -mesh_xform.basis[0].normalized()
-		facing_mesh = (facing_mesh - Vector3.UP * facing_mesh.dot(Vector3.UP)).normalized()
-
-		if horizontal_speed > 0:
-			facing_mesh = adjust_facing(
-				facing_mesh,
-				movement_dir,
-				delta,
-				1.0 / horizontal_speed * _turn_speed,
-				Vector3.UP
+			var m3 := Basis(
+				-facing_mesh,
+				Vector3.UP,
+				-facing_mesh.cross(Vector3.UP).normalized()
 			)
-		var m3 := Basis(
-			-facing_mesh,
-			Vector3.UP,
-			-facing_mesh.cross(Vector3.UP).normalized()
-		)
 
-		$CharacterModelRoot.set_transform(Transform3D(m3, mesh_xform.origin))
-				
-		velocity = horizontal_speed * horizontal_dir
-		var velocity_magnitude = velocity.length()
-		if velocity_magnitude > 3.5:
-			set_to_running()
-		elif velocity_magnitude > 1.0:
-			set_to_walking()
-		else:
-			set_to_idle()
+			$CharacterModelRoot.set_transform(Transform3D(m3, mesh_xform.origin))
+					
+			velocity = horizontal_speed * horizontal_dir
+			var velocity_magnitude = velocity.length()
+			if velocity_magnitude > 3.5:
+				set_to_running()
+			elif velocity_magnitude > 1.0:
+				set_to_walking()
+			else:
+				set_to_idle()
 		move_and_slide()
 		
-		if(_device_input.is_action_pressed("blow") and _lung_capacity > 0.0):
-			if _blow_stream:
-				if !_blow_stream.playing:
+		for i in get_slide_collision_count():
+			var c = get_slide_collision(i)
+			if c.get_collider() is ArrowBubble:
+				c.get_collider().pop()
+				on_impact()
+				
+		if !_conditions & Conditions.STUNNED:
+			if(_device_input.is_action_pressed("blow") and _lung_capacity > 0.0):
+				if _blow_stream:
+					if !_blow_stream.playing:
+						_blow_stream = SoundManager.play_sound(blow_audio)
+				else:
 					_blow_stream = SoundManager.play_sound(blow_audio)
+				blowing.emit(global_position, team_id)
+				_lung_capacity -= BLOWING_DECAY * delta
+				if _lung_capacity < 0:
+					_lung_capacity = 0
 			else:
-				_blow_stream = SoundManager.play_sound(blow_audio)
-			blowing.emit(global_position, team_id)
-			_lung_capacity -= BLOWING_DECAY * delta
-			if _lung_capacity < 0:
-				_lung_capacity = 0
-		else:
-			_lung_capacity += LUNG_REGEN_RATE * delta
-		
-		if(_device_input.is_action_pressed("attack") and _lung_capacity > 0.0):
-			$CharacterModelRoot/ArrowSpawner.shoot_arrow()
+				_lung_capacity += LUNG_REGEN_RATE * delta
 			
+			if(_device_input.is_action_pressed("attack") and _lung_capacity > 0.0):
+				$CharacterModelRoot/ArrowSpawner.shoot_arrow(team_id)
 
 ## Adjust facing is taken from the Godot Project Platformer Demo
 ## https://github.com/godotengine/godot-demo-projects
@@ -195,4 +192,13 @@ func set_to_running():
 
 func on_impact():
 	SoundManager.play_sound(impact_audio)
-	velocity = Vector3.ZERO
+	if team_id == 1:
+		velocity = Vector3(0,0,-5)
+	else:
+		velocity = Vector3(0,0,5)
+	_conditions = _conditions | Conditions.STUNNED
+	$StunnedTimer.start()
+
+
+func _on_stunned_timer_timeout() -> void:
+	_conditions = _conditions ^ Conditions.STUNNED

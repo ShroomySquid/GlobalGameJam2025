@@ -23,14 +23,6 @@ const team_2_id := 2
 
 func _ready():
 	reset_game()
-	#
-	#menu.hide()
-	#settings.hide()
-	#info_label.modulate.a = 0
-	#await get_tree().create_timer(0.5).timeout
-	#await reset_game()
-	#info_label.message("Go!", 1.5)
-
 
 func pause_trigger():
 	pass
@@ -57,8 +49,8 @@ func reset_game():
 	spawn_bubble(team_1_id, stage.team_one_bubble_spawn_point.position)
 	spawn_bubble(team_2_id, stage.team_two_bubble_spawn_point.position)
 	
-	spawn_player(0, team_1_id, stage.player_one_spawn_point.position)
-	spawn_player(1, team_2_id, stage.player_two_spawn_point.position)
+	spawn_player(-1, team_1_id, stage.player_one_spawn_point.position)
+	spawn_player(0, team_2_id, stage.player_two_spawn_point.position)
 	
 	p1_score_label.text = str(p1_score)
 	p2_score_label.text = str(p2_score)

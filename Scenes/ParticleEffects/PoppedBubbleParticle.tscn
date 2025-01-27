@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://bxrgw2s30j6jh"]
+
+[ext_resource type="Material" uid="uid://b6dfao5kqnm3l" path="res://Shaders/ShaderMaterials/BubbleMaterial01.tres" id="1_p7ggk"]
+
+[sub_resource type="Curve" id="Curve_dwyra"]
+_data = [Vector2(0, 1), 0.0, -1.51967, 0, 0, Vector2(1, 0), -3.55009, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8w83h"]
+curve = SubResource("Curve_dwyra")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p78nf"]
+emission_shape = 2
+emission_sphere_radius = 1.5
+inherit_velocity_ratio = 1.0
+radial_velocity_min = 0.199978
+radial_velocity_max = 3.99998
+damping_min = 4.0
+damping_max = 8.0
+scale_min = 0.1
+scale_over_velocity_min = 1.0
+scale_over_velocity_max = 2.0
+scale_over_velocity_curve = SubResource("CurveTexture_8w83h")
+
+[sub_resource type="SphereMesh" id="SphereMesh_spnwj"]
+material = ExtResource("1_p7ggk")
+
+[sub_resource type="Skin" id="Skin_3nw6l"]
+
+[node name="GPUParticles3D" type="GPUParticles3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.93451)
+emitting = false
+amount = 150
+lifetime = 0.2
+one_shot = true
+explosiveness = 0.2
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_p78nf")
+draw_pass_1 = SubResource("SphereMesh_spnwj")
+draw_skin = SubResource("Skin_3nw6l")

@@ -124,14 +124,14 @@ mesh = SubResource("BoxMesh_i28oj")
 
 [node name="P1Score" type="Label3D" parent="3DLayer/Stage/ScoreBoard"]
 unique_name_in_owner = true
-transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -0.6, 0.190794, -0.950906)
+transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, -0.6, 0.190794, -0.950906)
 text = "0"
 font_size = 70
 outline_size = 26
 
 [node name="P2Score" type="Label3D" parent="3DLayer/Stage/ScoreBoard"]
 unique_name_in_owner = true
-transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -0.6, 0.190794, 0.870706)
+transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, -0.6, 0.190794, 0.870706)
 text = "0"
 font_size = 70
 outline_size = 26

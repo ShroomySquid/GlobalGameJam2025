@@ -5,8 +5,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vekdr"]
 render_priority = 0
 shader = ExtResource("1_1mq3w")
-shader_parameter/shadow_color = Color(0, 0, 0, 1)
-shader_parameter/shadow_thickness = 2.0
+shader_parameter/shadow_color = Color(0.7019, 0.434271, 0.159931, 1)
+shader_parameter/shadow_thickness = 1.25
 
 [sub_resource type="QuadMesh" id="QuadMesh_pwl38"]
 material = SubResource("ShaderMaterial_vekdr")

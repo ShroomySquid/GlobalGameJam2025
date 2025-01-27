@@ -1,9 +1,10 @@
 extends RigidBody3D
+class_name ArrowBubble
 
-#func _on_area_3d_body_entered(body):
-	#if body != self:
-		#body.on_impact()
-		#queue_free()
-	#
-#func on_impact():
-	#queue_free()
+func _on_body_entered(body: Node) -> void:
+	pop()
+
+func pop():
+	$PoppedBalloonParticles.emitting = true
+	$PoppedBalloonParticles.reparent(get_parent())
+	call_deferred(&"queue_free")
