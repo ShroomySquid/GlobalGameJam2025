@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dscpilxu07tke"]
+
+[ext_resource type="Shader" path="res://Shaders/ShadowCatcher.gdshader" id="1_g16ln"]
+[ext_resource type="Texture2D" uid="uid://dxavodkknc80j" path="res://Shaders/bayer4tile8.png" id="2_03o4j"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_g16ln")
+shader_parameter/alpha = 0.463
+shader_parameter/bayer = ExtResource("2_03o4j")

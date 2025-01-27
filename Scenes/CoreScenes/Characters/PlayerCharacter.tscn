@@ -64,7 +64,7 @@ graph_offset = Vector2(-60, -75.467)
 
 [node name="PlayerCharacter" type="CharacterBody3D" groups=["characters"]]
 collision_layer = 2
-collision_mask = 30
+collision_mask = 62
 input_ray_pickable = false
 axis_lock_linear_y = true
 axis_lock_angular_x = true
@@ -88,46 +88,51 @@ anim_player = NodePath("../CharacterModelRoot/ImportedModel/AnimationPlayer")
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -0.804291, 0)
 
 [node name="Skeleton3D" parent="CharacterModelRoot/ImportedModel/Player" index="0"]
-bones/0/position = Vector3(0.000630631, 0.0054633, -0.893115)
-bones/0/rotation = Quaternion(-0.672541, 0.00386873, 0.0448845, 0.738687)
-bones/1/rotation = Quaternion(-0.0149056, -0.00836148, -0.022692, 0.999596)
-bones/2/rotation = Quaternion(0.086244, -0.02093, -0.0196096, 0.995861)
-bones/3/rotation = Quaternion(0.0862442, -0.02093, -0.0196096, 0.995861)
-bones/4/rotation = Quaternion(-0.00755941, 0.0274697, 0.00358225, 0.999588)
-bones/5/position = Vector3(-1.11759e-08, 0.049369, -0.000670398)
-bones/5/rotation = Quaternion(-0.119447, 0.0692485, 0.037522, 0.989712)
-bones/7/position = Vector3(0.0595572, 0.126793, -0.00090805)
-bones/7/rotation = Quaternion(-0.624714, -0.363902, 0.573702, -0.384933)
-bones/8/position = Vector3(1.27787e-07, 0.125186, -5.42027e-08)
-bones/8/rotation = Quaternion(0.319805, -0.0105327, -0.148971, 0.93564)
-bones/9/position = Vector3(-1.86411e-07, 0.242255, -3.7903e-08)
-bones/9/rotation = Quaternion(0.119177, 0.00827213, 0.691859, 0.712081)
-bones/11/position = Vector3(-0.0595572, 0.127142, -0.00391113)
-bones/11/rotation = Quaternion(0.5835, -0.400053, 0.606214, 0.363305)
-bones/12/position = Vector3(-1.67679e-09, 0.125186, -7.63081e-08)
-bones/12/rotation = Quaternion(0.386016, -0.0535131, 0.269184, 0.88072)
-bones/13/rotation = Quaternion(0.164953, -0.0688903, -0.77005, 0.612428)
-bones/15/rotation = Quaternion(0.0478923, 0.204394, 0.976591, 0.0468887)
-bones/16/rotation = Quaternion(-0.492648, 0.0039665, 0.000378914, 0.87022)
-bones/17/position = Vector3(-9.74512e-09, 0.424181, -1.58447e-08)
-bones/17/rotation = Quaternion(0.695521, 0.000728276, 0.0131383, 0.718385)
-bones/18/rotation = Quaternion(0.371875, 0.0891421, -0.110268, 0.91739)
-bones/20/position = Vector3(-0.0941963, -0.0543981, -0.00965037)
-bones/20/rotation = Quaternion(-0.0389807, 0.357495, 0.93307, -0.00756814)
-bones/21/rotation = Quaternion(-0.806328, 0.0520293, -0.0984639, 0.58089)
-bones/22/position = Vector3(1.72935e-08, 0.424257, -1.8048e-08)
-bones/22/rotation = Quaternion(0.624132, -0.0120142, -0.0389142, 0.780257)
-bones/23/rotation = Quaternion(0.288964, 0.00971726, 0.0523319, 0.955859)
-bones/24/position = Vector3(-1.21072e-08, 0.0670043, -1.52504e-08)
+bones/0/position = Vector3(-0.00138221, 0.0179464, -0.980758)
+bones/0/rotation = Quaternion(-0.731381, -0.0181678, 0.0183316, 0.681481)
+bones/1/rotation = Quaternion(-0.0684517, -2.0231e-05, -0.0281195, 0.997258)
+bones/2/rotation = Quaternion(0.0040664, -0.00205657, 0.0159154, 0.999863)
+bones/3/rotation = Quaternion(0.00407346, -0.0020709, 0.0159091, 0.999863)
+bones/4/rotation = Quaternion(0.118047, 0.0102983, -0.0029981, 0.99295)
+bones/5/position = Vector3(-1.16415e-09, 0.049369, -0.000670319)
+bones/5/rotation = Quaternion(-0.0720934, 0.0514139, -0.0119897, 0.996)
+bones/7/position = Vector3(0.0595572, 0.126793, -0.000908059)
+bones/7/rotation = Quaternion(-0.633028, -0.395272, 0.53075, -0.40167)
+bones/8/position = Vector3(8.81447e-09, 0.125186, -6.51598e-08)
+bones/8/rotation = Quaternion(0.533981, -0.0189458, -0.0824908, 0.841249)
+bones/9/position = Vector3(-1.4349e-08, 0.242254, -3.75157e-09)
+bones/9/rotation = Quaternion(0.00746184, -0.0019339, 0.0733278, 0.997278)
+bones/11/position = Vector3(-0.0595572, 0.127142, -0.00391111)
+bones/11/rotation = Quaternion(0.542033, -0.421018, 0.636707, 0.351495)
+bones/12/position = Vector3(9.53406e-09, 0.125186, -4.37305e-08)
+bones/12/rotation = Quaternion(0.483367, -0.170973, -0.0523563, 0.856962)
+bones/13/rotation = Quaternion(0.0113769, 0.00171162, -0.0913867, 0.995749)
+bones/15/rotation = Quaternion(0.114389, 0.0248129, 0.991215, -0.0615783)
+bones/16/rotation = Quaternion(-0.213705, -0.0590316, -0.0180892, 0.974945)
+bones/17/position = Vector3(-1.8294e-08, 0.424181, 4.65151e-09)
+bones/17/rotation = Quaternion(0.593464, -0.0291239, -0.0373568, 0.803466)
+bones/18/rotation = Quaternion(0.285576, 0.0378333, -0.0111796, 0.957544)
+bones/20/position = Vector3(-0.0941963, -0.0543981, -0.00965038)
+bones/20/rotation = Quaternion(-0.0175331, 0.0332174, 0.998773, 0.0322649)
+bones/21/rotation = Quaternion(-0.223551, 0.0846528, 0.0121445, 0.970933)
+bones/22/position = Vector3(1.03656e-08, 0.424257, -1.50061e-08)
+bones/22/rotation = Quaternion(0.598569, 0.0980568, -0.00133877, 0.795046)
+bones/23/rotation = Quaternion(0.282405, -0.0379709, 0.0111899, 0.958478)
+bones/24/position = Vector3(-1.8772e-08, 0.0670043, -1.18162e-08)
 
 [node name="ArrowSpawner" parent="CharacterModelRoot" instance=ExtResource("3_5psm3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.787404, 0.7, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.560974, 0.7, 0)
 
 [node name="StunnedTimer" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
 
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [connection signal="timeout" from="StunnedTimer" to="." method="_on_stunned_timer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 
 [editable path="CharacterModelRoot/ImportedModel"]
 [editable path="CharacterModelRoot/ArrowSpawner"]

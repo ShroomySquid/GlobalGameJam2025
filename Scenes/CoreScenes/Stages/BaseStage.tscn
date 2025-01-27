@@ -38,15 +38,16 @@ transform = Transform3D(0.947244, 0.152365, -0.281982, 3.08477e-08, 0.879782, 0.
 transform = Transform3D(0.947244, 0.152365, -0.281982, 3.08477e-08, 0.879782, 0.475377, 0.320514, -0.450298, 0.833368, -1.16685, -23.0497, 14.7823)
 
 [node name="LeftTeamBubbleSpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(0.947244, 0.152365, -0.281982, 3.08477e-08, 0.879782, 0.475377, 0.320514, -0.450298, 0.833368, 0, 0.642836, -3.09192)
+transform = Transform3D(0.947244, 0.152365, -0.281982, 3.08477e-08, 0.879782, 0.475377, 0.320514, -0.450298, 0.833368, 0, 1, -2)
 
 [node name="RightTeamBubbleSpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(0.947244, 0.152365, -0.281982, 0.245934, -0.909701, 0.334604, -0.205538, -0.386301, -0.899181, 0, 0.401297, 14.6759)
+transform = Transform3D(0.947244, 0.152365, -0.281982, 0.245934, -0.909701, 0.334604, -0.205538, -0.386301, -0.899181, 0, 1, 14)
 
 [node name="InvisibleWallContainer" type="Node3D" parent="."]
 
 [node name="InvisibleWall" parent="InvisibleWallContainer" instance=ExtResource("4_m8n1j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.409296, 0.42061, 5.95822)
+collision_layer = 33
 
 [node name="InvisibleWall2" parent="InvisibleWallContainer" instance=ExtResource("4_m8n1j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.409296, 0.42061, 18.5691)

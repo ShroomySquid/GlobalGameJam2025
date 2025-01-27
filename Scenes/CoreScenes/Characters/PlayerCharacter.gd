@@ -4,8 +4,9 @@ class_name PlayerCharacter
 # anim -> idle, walking, sprint, attacking, blowing
 # Special states? -> exhausted, stunned, sprinting
 signal blowing
+signal blowing_delta
 
-enum Conditions{NONE=0, SPRINTING=1, EXHAUSTED=2, STUNNED=4}
+enum Conditions{NONE=0, SPRINTING=1, EXHAUSTED=2, STUNNED=4, ATTACKING=8}
 
 const BLOWING_DECAY : float = 4.0
 const SPRINT_DECAY : float = 10.0
@@ -136,8 +137,10 @@ func _physics_process(delta):
 			if c.get_collider() is ArrowBubble:
 				c.get_collider().pop()
 				on_impact()
+			elif c.get_collider() is Bubble:
+				c.get_collider().on_impact()
 				
-		if !_conditions & Conditions.STUNNED:
+		if !_conditions & Conditions.STUNNED and !_conditions & Conditions.ATTACKING:
 			if(_device_input.is_action_pressed("blow") and _lung_capacity > 0.0):
 				if _blow_stream:
 					if !_blow_stream.playing:
@@ -145,6 +148,7 @@ func _physics_process(delta):
 				else:
 					_blow_stream = SoundManager.play_sound(blow_audio)
 				blowing.emit(global_position, team_id)
+				blowing_delta.emit(global_position, team_id, delta)
 				_lung_capacity -= BLOWING_DECAY * delta
 				if _lung_capacity < 0:
 					_lung_capacity = 0
@@ -152,7 +156,7 @@ func _physics_process(delta):
 				_lung_capacity += LUNG_REGEN_RATE * delta
 			
 			if(_device_input.is_action_pressed("attack") and _lung_capacity > 0.0):
-				$CharacterModelRoot/ArrowSpawner.shoot_arrow(team_id)
+				attack()
 
 ## Adjust facing is taken from the Godot Project Platformer Demo
 ## https://github.com/godotengine/godot-demo-projects
@@ -180,15 +184,30 @@ func adjust_facing(facing: Vector3, target: Vector3, step: float, adjust_rate: f
 	ang = (ang - a) * s
 
 	return (normal * cos(ang) + t * sin(ang)) * facing.length()
-	
+
+func attack():
+	velocity = Vector3.ZERO
+	$CharacterModelRoot/ImportedModel/AnimationPlayer.speed_scale = 4.0
+	$CharacterModelRoot/ImportedModel/AnimationPlayer.play(&"BloWWithFlask Retarget")
+	if team_id == 2:
+		$CharacterModelRoot.rotation_degrees.y = 270
+	else:
+		$CharacterModelRoot.rotation_degrees.y = 90
+	$CharacterModelRoot/ArrowSpawner.shoot_arrow(team_id)
+	_conditions = _conditions | Conditions.ATTACKING
+	$AttackTimer.start()
+		
 func set_to_idle():
-	$CharacterModelRoot/ImportedModel/AnimationPlayer.play(&"Idle Retarget")
+	if !_conditions & Conditions.STUNNED and !_conditions & Conditions.ATTACKING:
+		$CharacterModelRoot/ImportedModel/AnimationPlayer.play(&"Idle Retarget")
 	
 func set_to_walking():
-	$CharacterModelRoot/ImportedModel/AnimationPlayer.play(&"Walking_Anim Retarget_001")
+	if !_conditions & Conditions.STUNNED and !_conditions & Conditions.ATTACKING:
+		$CharacterModelRoot/ImportedModel/AnimationPlayer.play(&"Walking_Anim Retarget_001")
 	
 func set_to_running():
-	$CharacterModelRoot/ImportedModel/AnimationPlayer.play(&"Running_anim Retarget")
+	if !_conditions & Conditions.STUNNED and !_conditions & Conditions.ATTACKING:
+		$CharacterModelRoot/ImportedModel/AnimationPlayer.play(&"Running_anim Retarget")
 
 func on_impact():
 	SoundManager.play_sound(impact_audio)
@@ -199,6 +218,10 @@ func on_impact():
 	_conditions = _conditions | Conditions.STUNNED
 	$StunnedTimer.start()
 
-
 func _on_stunned_timer_timeout() -> void:
 	_conditions = _conditions ^ Conditions.STUNNED
+
+func _on_attack_timer_timeout() -> void:
+	_conditions = _conditions ^ Conditions.ATTACKING
+	$CharacterModelRoot/ImportedModel/AnimationPlayer.play(&"Idle Retarget")
+	$CharacterModelRoot/ImportedModel/AnimationPlayer.speed_scale = 1.0

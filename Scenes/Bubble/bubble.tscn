@@ -1,25 +1,66 @@
-[gd_scene load_steps=8 format=3 uid="uid://pgo07hl7oibs"]
+[gd_scene load_steps=16 format=3 uid="uid://pgo07hl7oibs"]
 
 [ext_resource type="Script" path="res://Scenes/Bubble/bubble.gd" id="1_kob1u"]
+[ext_resource type="AudioStream" uid="uid://b8be62ceslxfo" path="res://Sound&Music/BubblePop/BubblePopRandom.tres" id="2_n14w0"]
 [ext_resource type="Material" uid="uid://b6dfao5kqnm3l" path="res://Shaders/ShaderMaterials/BubbleMaterial01.tres" id="2_y7ook"]
-[ext_resource type="AudioStream" uid="uid://dx5dd40hkt5o4" path="res://Sound&Music/BubblePop/Bubble_pop01.wav" id="3_pnnii"]
+[ext_resource type="Material" uid="uid://dscpilxu07tke" path="res://Shaders/ShaderMaterials/BubbleMaterialShadowCatcher.tres" id="4_ymmrq"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3qtfd"]
 
+[sub_resource type="Curve" id="Curve_wmjjn"]
+_data = [Vector2(0.010929, 0.0136364), 0.0, 0.554547, 0, 0, Vector2(0.996357, 0.995455), 3.39382, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_irm2g"]
+radius = 0.8
 
 [sub_resource type="SphereMesh" id="SphereMesh_sbnex"]
 material = ExtResource("2_y7ook")
 
+[sub_resource type="SphereMesh" id="SphereMesh_wcbev"]
+material = ExtResource("4_ymmrq")
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_huv0n"]
+
+[sub_resource type="Curve" id="Curve_dwyra"]
+_data = [Vector2(0, 1), 0.0, -1.51967, 0, 0, Vector2(1, 0), -3.55009, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8w83h"]
+curve = SubResource("Curve_dwyra")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xgb0n"]
+emission_shape = 2
+emission_sphere_radius = 1.2
+inherit_velocity_ratio = 1.0
+radial_velocity_min = 0.199978
+radial_velocity_max = 3.99998
+damping_min = 4.0
+damping_max = 8.0
+scale_min = 0.1
+scale_max = 0.6
+scale_over_velocity_min = 1.0
+scale_over_velocity_max = 2.0
+scale_over_velocity_curve = SubResource("CurveTexture_8w83h")
+
+[sub_resource type="SphereMesh" id="SphereMesh_spnwj"]
+material = ExtResource("2_y7ook")
+
+[sub_resource type="Skin" id="Skin_3nw6l"]
 
 [node name="Bubble" type="RigidBody3D" groups=["bubbles"]]
 collision_layer = 4
 collision_mask = 11
+input_ray_pickable = false
 axis_lock_linear_y = true
 axis_lock_angular_y = true
 physics_material_override = SubResource("PhysicsMaterial_3qtfd")
+contact_monitor = true
+max_contacts_reported = 2
+linear_damp = 1.0
 script = ExtResource("1_kob1u")
+pop_sound = ExtResource("2_n14w0")
+blow_power_curve = SubResource("Curve_wmjjn")
 
 [node name="BubbleCollision" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_irm2g")
@@ -28,6 +69,12 @@ shape = SubResource("SphereShape3D_irm2g")
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 mesh = SubResource("SphereMesh_sbnex")
 
+[node name="BubbleMeshShadow" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+cast_shadow = 3
+gi_lightmap_scale = 2
+mesh = SubResource("SphereMesh_wcbev")
+
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 4
 collision_mask = 10
@@ -35,8 +82,16 @@ collision_mask = 10
 [node name="RamPopCollision" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_huv0n")
 
-[node name="PopStreamPlayer" type="AudioStreamPlayer3D" parent="."]
-unique_name_in_owner = true
-stream = ExtResource("3_pnnii")
+[node name="PopParticles" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 150
+lifetime = 0.2
+one_shot = true
+explosiveness = 0.2
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_xgb0n")
+draw_pass_1 = SubResource("SphereMesh_spnwj")
+draw_skin = SubResource("Skin_3nw6l")
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="Area3D" to="." method="on_impact"]
